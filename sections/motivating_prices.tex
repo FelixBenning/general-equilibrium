@@ -2,6 +2,11 @@
 
 Let \(X_i = X_i(L_i)\) be the set of possible production vectors of person \(i\)
 under labour constraint \(L_i\).
+\\
+\begin{wrapfigure}{r}{0.4\textwidth}
+	\includegraphics[width=0.4\textwidth]{images/pure-variable-cost.jpeg}
+	\caption{Pure Variable Cost \(X_i\)}
+\end{wrapfigure}
 \begin{example}[Pure Variable Costs]
 	One important special case is
 	\[
@@ -46,5 +51,20 @@ under labour constraint \(L_i\).
 	time required to produce \(j\). And without exhaustion this is simply
 	\(l^{(j)}_i\). If the willingness to work for good \(j\) is smaller than
 	its price, then our gradient is negative in this direction. Meaning that
-	a reduction of \(x_j\) would increase our utility.
+	a reduction of \(x^{(j)}\) would increase our utility. If \(\text{wtw}^{(j)}\) is
+	greater than the price of \(j\), an increase of \(x^{(j)}\) increases utility.
+\end{example}
+\begin{figure}
+	\includegraphics[width=0.4\textwidth]{images/hermit-decision-pure-variable.jpeg}
+	\includegraphics[width=0.58\textwidth]{images/hermit-decision-setup-cost.jpeg}
+	\caption{Hermit Decision in simple pure variable cost case on the left.
+	fixed set-up time \(f^{(2)}\) for the production of good \(2\) to the right.
+	This allows for more production of good \(1\) if \(x^{(2)}=0\). The dotted
+	line represents the production frontier in the ``cloned hermit economy''.}
+\end{figure}
+\begin{example}[Cloned Hermit Economy]
+	If we clone our hermit in the previous example \(n\) times, the clones could
+	start trading. Although they have very little reason to do so for now.
+	Nevertheless let us first consider what exchange rates are possible before
+	we modify \(X_i\) to give them a reason to do so.
 \end{example}
