@@ -117,10 +117,10 @@ measure instead of strictly time.
 
 	Although right now, tallies can be negative and we do not have negative
 	chips/money. This is a problem if you start out with everyone at zero. Because
-	nobody can go below that. Or can they? If Ben signs a piece of paper saying
-	he owes \(x\) amount of work-time, then he can pass that for a product that
+	nobody can go below that. Or can they? If Alice signs a piece of paper saying
+	she owes \(x\) amount of work-time, then she can pass that for a product that
 	costs \(x\). The person receiving this note could then pass this note on to
-	pay for something too. And if everyone trusts Ben, this is going to go
+	pay for something too. And if everyone trusts Alice, this is going to go
 	swimmingly. So in principle anyone can create money. Money is just the debt of
 	someone. The difficulty is creating debt which is widely accepted.
 
@@ -137,11 +137,40 @@ measure instead of strictly time.
 	much less robust and efficient in reality. Because you need to \emph{trust}
 	people to update their tallies accurately, \emph{trust} that they make sure
 	they don't go too far into the negative, and you need to travel to a
-	communal holding space instead of conducting exchanges decentrally.
+	communal holding space instead of conducting exchanges \emph{decentrally}.
 \end{remark}
 
+In the hopes that we justified ownership, trade and prices sufficiently, let us
+consider this in more detail. We have suggested using \(l^{(j)}_i\) as prices.
+This implies that one good \(j\) has different prices, depending on the producer
+\(i\). Since we assume that there are no quality differences, people will
+obviously by the cheaper products first. Let \(p_j\) be the largest price for
+which good \(j\) is ever sold. Potential producers \(i\) with \(l^{(j)}_i > p_j\)
+refrain from producing good \(j\) and focus their attention on other products.
 
+The producers with \(l^{(j)}_i < p_j\) now see, that they could have sold their
+goods for more. And since the cost of production \(l^{(j)}_i\) is private
+information, they will likely claim that this cost went up a little next time.
+I.e. in the long run, only one prices \(p_j\) per good \(j\) is stable.
 
+The question remains: What is the right price? Should we average the
+\(l^{(j)}_i\) somehow? It turns out, that ensuring supply to be equal to demand
+\(S=D\) leaves us with very little choice when it comes to prices anyway.
+Let us see what happens for fixed prices. We want \(S=D\). This obviously
+implies
+\begin{equation}
+	\label{eq: supply gdp = demand gdp}
+	0 =\langle S-D,p\rangle =  \sum_{i=1}^n \langle S_i - D_i, p\rangle
+\end{equation}
+A market based system on the other hand ensures
+\[
+	0 = \langle S_i - D_i, p\rangle
+	= \underbrace{\langle S_i, p\rangle}_{\text{income}}
+	- \underbrace{\langle D_i,p\rangle}_{\text{expenses}}
+\]
+which is more than sufficient for the sums in Equation~\eqref{eq: supply gdp =
+demand gdp} to be equal, but not sufficient for \(S=D\). In fact, it only
+ensures that the price is orthogonal to the demand/supply mismatch \(S-D\).
 
 
 \begin{figure}
