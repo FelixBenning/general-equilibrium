@@ -28,6 +28,11 @@ under labour constraint \(L_i\).
 	enjoyable and vice versa.
 \end{example}
 
+\begin{wrapfigure}{r}{0.4\textwidth}
+	\includegraphics[width=0.4\textwidth]{images/hermit-decision-pure-variable.jpeg}
+	\caption{Hermit Decision in the simple pure variable cost case.}
+\end{wrapfigure}
+
 \begin{example}[Hermit Economy with Pure Variable Costs]
 	A hermit faces the utility function maximization problem
 	\[
@@ -171,19 +176,86 @@ A market based system on the other hand ensures
 which is more than sufficient for the sums in Equation~\eqref{eq: supply gdp =
 demand gdp} to be equal, but not sufficient for \(S=D\). In fact, it only
 ensures that the price is orthogonal to the demand/supply mismatch \(S-D\).
+If there are \(d\) products, that leaves a \(d-1\) hyperplane.
 
+But as we will see, there are some price vectors, which do ensure \(S=D\).
+We call these economic equilibria.
 
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{images/hermit-decision-pure-variable.jpeg}
-	\includegraphics[width=0.58\textwidth]{images/hermit-decision-setup-cost.jpeg}
-	\caption{Hermit Decision in simple pure variable cost case on the left.
-	fixed set-up time \(f^{(2)}\) for the production of good \(2\) to the right.
-	This allows for more production of good \(1\) if \(x^{(2)}=0\). The dotted
-	line represents the production frontier in the ``cloned hermit economy''.}
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/consumption_increase_by_trade.jpeg}
+	\caption{
+		Product vectors on the \(d-1\) dimensional hyperplanes orthogonal to \(p\)
+		cost the same amount and can therefore be exchanged (here \(d=2\), so the
+		hyperplanes are lines). Trading at prices \(p\) enlarges the set of
+		product vectors available for consumption for person \(i\).
+	}
+	\label{fig: consumption increase by trade}
 \end{figure}
+For a fixed price vector \(p\), let us consider the production and consumption
+decision of person \(i\). As their expenses have to be smaller than their
+income, it makes sense to maximize income for a given amount of labour \(L_i\).
+Recall that our production options are \(X_i=X_i(L_i)\). So the maximal income
+given \(L_i\) is
+\[
+	\tag{income}\label{eq: income}
+	\mu(p, X_i) := \sup\{\langle p, x\rangle : x\in X_i\}.
+\]
+The function \(\mu(\cdot, X_i)\) in \(p\), is called the ``support function'' of
+\(X_i\). It has some useful properties we will be grateful for later on. Our
+utility optimization problem therefore becomes
+\[
+	\max_{L_i, y} u(1-L_i, y) \quad\text{subject to}\quad \langle y, p\rangle \le \mu(p, X_i(L_i))
+\]
+In Figure~\ref{fig: consumption increase by trade} we can see, how this
+constraint is always weaker than \(y\in X_i(L_i)\), which is the constraint of
+self-sufficiency. I.e. we get the following lemma.
+
+\begin{lemma}[Trade is never harmful]
+\[
+	\underbrace{X_i(L_i)}_{\text{own production}}
+	\subseteq \quad
+	\underbrace{
+		\{y\in\real_{\ge 0}^\dims: \langle y, p\rangle \le \mu(p, X_i)\}
+	}_{\text{consumption options with trade}}
+\]
+\end{lemma}
+\begin{proof}
+	Choose an arbitrary \(y\in X_i\), then by definition of \(\mu\)
+	\[
+		\langle p, y\rangle \overset{y\in X_i}\le \sup\{\langle p, x\rangle : x\in
+		X_i\} \overset{\text{def.}}= \mu(p, X_i),
+	\]
+	\(y\) is also in the set on the right.
+\end{proof}
+
+
+
+
+
+
+\subsubsection{Properties}
+Assuming \(X_i\) is compact and
+\[
+	x^* \in \argmax_{x\in X_i} \langle p, x\rangle
+\]
+we have \(\mu(p,X_i) = \langle p, x^*\rangle\) and therefore\fxnote{source}
+\[
+	x^*\in \nabla_p \mu(p,X_i).
+\]
+
+
 \begin{example}[Cloned Hermit Economy]
 	If we clone our hermit in the previous example \(n\) times, the clones could
 	start trading. Although they have very little reason to do so for now.
-	Nevertheless let us first consider what exchange rates are possible before
-	we modify \(X_i\) to give them a reason to do so.
+	Nevertheless let us first consider what equilibrium prices are possible
+	before we modify \(X_i\) to give them a reason to do so.
 \end{example}
+
+\begin{figure}
+	\includegraphics[width=0.58\textwidth]{images/hermit-decision-setup-cost.jpeg}
+	\caption{
+	fixed set-up time \(f^{(2)}\) for the production of good \(2\). This allows
+	for more production of good \(1\) if \(x^{(2)}=0\). The dotted line
+	represents the production frontier in the ``cloned hermit economy''.}
+\end{figure}
