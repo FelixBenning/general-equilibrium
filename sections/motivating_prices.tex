@@ -1,68 +1,5 @@
 \section{Motivating Prices}
 
-Let \(X_i = X_i(L_i)\) be the set of possible production vectors of person \(i\)
-under labour constraint \(L_i\).
-\\
-\begin{wrapfigure}{r}{0.4\textwidth}
-	\includegraphics[width=0.4\textwidth]{images/pure-variable-cost.jpeg}
-	\caption{Pure Variable Cost \(X_i\)}
-\end{wrapfigure}
-\begin{example}[Pure Variable Costs]
-	One important special case is
-	\[
-		X_i = \{ x \in \real_{\ge 0}^\dims: \langle x, l_i \rangle \le L_i \}.
-	\]
-	Here \(l_i^{(j)}\ge0\) is the labour time required by person \(i\) to produce one
-	unit of good \(j\). Therefore the total time spent to produce quantity
-	\(x^{(j)}\) of good \(j\) is \(x^{(j)}l_i^{(j)}\). Summing over all goods
-	results in the total time requirement
-	\[
-		L_i(x) = \sum_{j=1}^\dims x^{(j)}l_i^{(j)} = \langle x, l_i\rangle,
-	\]
-	which obviously needs to be smaller than our time constraint \(L_i\).
-
-	One could easily model exhaustion with \(L_i(x) = g(\langle x, l_i\rangle)\)
-	for some strictly monotonously increasing function \(g\). You could also
-	view \(L_i(x)\) more generally as the discomfort of labour instead of merely
-	the time required, to generalize to tasks which take longer but are more
-	enjoyable and vice versa.
-\end{example}
-
-\begin{wrapfigure}{r}{0.4\textwidth}
-	\includegraphics[width=0.4\textwidth]{images/hermit-decision-pure-variable.jpeg}
-	\caption{Hermit Decision in the simple pure variable cost case.}
-\end{wrapfigure}
-
-\begin{example}[Hermit Economy with Pure Variable Costs]
-	A hermit faces the utility function maximization problem
-	\[
-		\max_{x} u(\overbrace{1-L_i(x)}^{\text{free time}}, x).
-	\]
-	Denoting the partial derivative with regard to free time as \(u_f\) and the
-	gradient vector with regard to \(x\) as \(u_x\), the first
-	order condition for maximization requires
-	\[
-		0\overset!=\frac{du}{dx}
-		= u_x - \nabla L_i(x) u_f
-		= u_f \Bigl[
-			\underbrace{\frac{u_x}{u_f}}_{\mathclap{\text{willingness to work (wtw)}}}
-		- \overbrace{\nabla L_i(x)}^{\mathclap{\text{natural prices}}}
-		\Bigr],
-	\]
-	where we can assume the marginal utility of more free time \(u_f\) to be
-	positive. The natural prices are simply {\color{lightgray} a multiple of}
-	\(l_i\)
-	\[
-		\nabla L_i(x) = {\color{lightgray} g'(\langle x, l_i\rangle) }l_i.
-	\]
-	In other words: the price of good \(j\), is the {\color{lightgray} marginal}
-	time required to produce \(j\). And without exhaustion this is simply
-	\(l^{(j)}_i\). If the willingness to work for good \(j\) is smaller than
-	its price, then our gradient is negative in this direction. Meaning that
-	a reduction of \(x^{(j)}\) would increase our utility. If \(\text{wtw}^{(j)}\) is
-	greater than the price of \(j\), an increase of \(x^{(j)}\) increases utility.
-\end{example}
-
 Hermits are great and all, but that is not what we are interested in. How could
 multiple people share the goods they produced? To satisfy the ``Pluralism in
 Economics'' crowd, let us avoid the term ownership for now. We simply observe
@@ -110,9 +47,9 @@ measure instead of strictly time.
 	sure that the difference is approximately zero. So we might as well add
 	``work-time'' and subtract ``consumption-time'' from the get go. We also do not
 	need to know how the current tally came to be, so we can only keep track of
-	the total. This total is going to fluctuate around zero. When it is positive,
-	you have worked more for society than you have consumed. And vice versa when it
-	is negative.
+	the running total. This total is going to fluctuate around zero. When it is
+	positive, you have worked more for society than you have consumed. And vice
+	versa when it is negative.
 
 	Now consider the life of a single product. When it is consumed, the cost was
 	added to the tally of the producer and subtracted from the consumer. If you
@@ -126,8 +63,8 @@ measure instead of strictly time.
 	she owes \(x\) amount of work-time, then she can pass that for a product that
 	costs \(x\). The person receiving this note could then pass this note on to
 	pay for something too. And if everyone trusts Alice, this is going to go
-	swimmingly. So in principle anyone can create money. Money is just the debt of
-	someone. The difficulty is creating debt which is widely accepted.
+	swimmingly. So in principle anyone can create money. Money is just the debt
+	of someone. The difficulty is creating debt which is widely accepted.
 
 	The balance on a bill splitting app is money (in your friends circle), a coupon
 	is money (scammers like to be paid in it), etc. But the money which is most
@@ -149,7 +86,7 @@ In the hopes that we justified ownership, trade and prices sufficiently, let us
 consider this in more detail. We have suggested using \(l^{(j)}_i\) as prices.
 This implies that one good \(j\) has different prices, depending on the producer
 \(i\). Since we assume that there are no quality differences, people will
-obviously by the cheaper products first. Let \(p_j\) be the largest price for
+obviously buy the cheaper products first. Let \(p_j\) be the largest price for
 which good \(j\) is ever sold. Potential producers \(i\) with \(l^{(j)}_i > p_j\)
 refrain from producing good \(j\) and focus their attention on other products.
 
@@ -157,105 +94,3 @@ The producers with \(l^{(j)}_i < p_j\) now see, that they could have sold their
 goods for more. And since the cost of production \(l^{(j)}_i\) is private
 information, they will likely claim that this cost went up a little next time.
 I.e. in the long run, only one prices \(p_j\) per good \(j\) is stable.
-
-The question remains: What is the right price? Should we average the
-\(l^{(j)}_i\) somehow? It turns out, that ensuring supply to be equal to demand
-\(S=D\) leaves us with very little choice when it comes to prices anyway.
-Let us see what happens for fixed prices. We want \(S=D\). This obviously
-implies
-\begin{equation}
-	\label{eq: supply gdp = demand gdp}
-	0 =\langle S-D,p\rangle =  \sum_{i=1}^n \langle S_i - D_i, p\rangle
-\end{equation}
-A market based system on the other hand ensures
-\[
-	0 = \langle S_i - D_i, p\rangle
-	= \underbrace{\langle S_i, p\rangle}_{\text{income}}
-	- \underbrace{\langle D_i,p\rangle}_{\text{expenses}}
-\]
-which is more than sufficient for the sums in Equation~\eqref{eq: supply gdp =
-demand gdp} to be equal, but not sufficient for \(S=D\). In fact, it only
-ensures that the price is orthogonal to the demand/supply mismatch \(S-D\).
-If there are \(d\) products, that leaves a \(d-1\) hyperplane.
-
-But as we will see, there are some price vectors, which do ensure \(S=D\).
-We call these economic equilibria.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\textwidth]{images/consumption_increase_by_trade.jpeg}
-	\caption{
-		Product vectors on the \(d-1\) dimensional hyperplanes orthogonal to \(p\)
-		cost the same amount and can therefore be exchanged (here \(d=2\), so the
-		hyperplanes are lines). Trading at prices \(p\) enlarges the set of
-		product vectors available for consumption for person \(i\).
-	}
-	\label{fig: consumption increase by trade}
-\end{figure}
-For a fixed price vector \(p\), let us consider the production and consumption
-decision of person \(i\). As their expenses have to be smaller than their
-income, it makes sense to maximize income for a given amount of labour \(L_i\).
-Recall that our production options are \(X_i=X_i(L_i)\). So the maximal income
-given \(L_i\) is
-\[
-	\tag{income}\label{eq: income}
-	\mu(p, X_i) := \sup\{\langle p, x\rangle : x\in X_i\}.
-\]
-The function \(\mu(\cdot, X_i)\) in \(p\), is called the ``support function'' of
-\(X_i\). It has some useful properties we will be grateful for later on. Our
-utility optimization problem therefore becomes
-\[
-	\max_{L_i, y} u(1-L_i, y) \quad\text{subject to}\quad \langle y, p\rangle \le \mu(p, X_i(L_i))
-\]
-In Figure~\ref{fig: consumption increase by trade} we can see, how this
-constraint is always weaker than \(y\in X_i(L_i)\), which is the constraint of
-self-sufficiency. I.e. we get the following lemma.
-
-\begin{lemma}[Trade is never harmful]
-\[
-	\underbrace{X_i(L_i)}_{\text{own production}}
-	\subseteq \quad
-	\underbrace{
-		\{y\in\real_{\ge 0}^\dims: \langle y, p\rangle \le \mu(p, X_i)\}
-	}_{\text{consumption options with trade}}
-\]
-\end{lemma}
-\begin{proof}
-	Choose an arbitrary \(y\in X_i\), then by definition of \(\mu\)
-	\[
-		\langle p, y\rangle \overset{y\in X_i}\le \sup\{\langle p, x\rangle : x\in
-		X_i\} \overset{\text{def.}}= \mu(p, X_i),
-	\]
-	\(y\) is also in the set on the right.
-\end{proof}
-
-
-
-
-
-
-\subsubsection{Properties}
-Assuming \(X_i\) is compact and
-\[
-	x^* \in \argmax_{x\in X_i} \langle p, x\rangle
-\]
-we have \(\mu(p,X_i) = \langle p, x^*\rangle\) and therefore\fxnote{source}
-\[
-	x^*\in \nabla_p \mu(p,X_i).
-\]
-
-
-\begin{example}[Cloned Hermit Economy]
-	If we clone our hermit in the previous example \(n\) times, the clones could
-	start trading. Although they have very little reason to do so for now.
-	Nevertheless let us first consider what equilibrium prices are possible
-	before we modify \(X_i\) to give them a reason to do so.
-\end{example}
-
-\begin{figure}
-	\includegraphics[width=0.58\textwidth]{images/hermit-decision-setup-cost.jpeg}
-	\caption{
-	fixed set-up time \(f^{(2)}\) for the production of good \(2\). This allows
-	for more production of good \(1\) if \(x^{(2)}=0\). The dotted line
-	represents the production frontier in the ``cloned hermit economy''.}
-\end{figure}
