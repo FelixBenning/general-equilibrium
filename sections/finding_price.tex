@@ -274,9 +274,9 @@ extended pure variable cost case (with setup costs), where the costs are random
 variables.\fxnote{add reference}
 
 \begin{lemma}[Production Frontier]
-	If \(X\subset \real_{\ge 0}^\dims\) is a compact, convex \ref{eq: lower
+	If \(X\) is a compact, convex \ref{eq: lower
 	layer}, then for any \(x\in \partial X\), there exists
-	\(p\in\real_{\ge 0}^\dims\) such that
+	\(p\neq 0\) such that
 	\begin{equation}
 		\label{eq: prod frontier p}
 		x \in \argmax_{y\in X} \langle p, y\rangle %= \nabla_p \mu(p, X)
@@ -285,15 +285,15 @@ variables.\fxnote{add reference}
 	\[
 		\mu(p, X) = \langle p, x\rangle.
 	\]
-	If additionally \(x\in\real_{>0}^\dims\) then \(p\in\real_{\ge 0}^\dims\) is
-	necessary.
+	If additionally \(x\in\real_{>0}^\dims\), then necessarily \(p\in\real_{\ge
+	0}^\dims\) if \(p\) satisfies \eqref{eq: prod frontier p}.
 \end{lemma}
 \begin{proof}
 	Let \(x\in \partial X\), define \(A:=X^\circ\) and \(B:=\{x\}\). Then \(A\)
 	is open; \(A\) and \(B\) are disjoint, nonempty
 	convex subsets of \(\real^\dims\). So by the hyperplane separation theorem
 	there exists
-	\(p\in\real^\dims\) and \(c\in\real\) with
+	\(0\neq p\in\real^\dims\) and \(c\in\real\) with
 	\[
 		\forall y\in A : \langle y, p\rangle < c
 		\qquad\text{and}\qquad
@@ -308,9 +308,7 @@ variables.\fxnote{add reference}
 	Therefore \(x\in\argmax_{y\in X} \langle p, y\rangle\) and \(\mu(p, X) =
 	\langle x, p\rangle\).
 
-	Before we show, that there exists a \(p\) with non-negative entries, let us
-	consider the strict case
-	\(x=(x^{(1)},\dots,x^{(\dims)})\in\real_{>0}^\dims\).
+	Let us now consider \(x=(x^{(1)},\dots,x^{(\dims)})\in\real_{>0}^\dims\).
 	To arrive at a contradiction, we assume \(p_i < 0\). Since \(x^{(i)}>0\) and
 	\(X\) is a \ref{eq: lower layer}, we can replace the entry \(x^{(i)}\) with
 	\(0\) to obtain \(\tilde{x}\in X\). Then
@@ -322,23 +320,6 @@ variables.\fxnote{add reference}
 		= \langle x, p\rangle,
 	\]
 	which is a contradiction to \eqref{eq: x is max w.r.t. p}.
-
-	Going back to the general case, if we allow entries of \(x\) to be zero, the
-	same technique still applies to the entries where \(x^{(i)}>0\). So let us
-	now consider the remaining entries, where \(x^{(i)}=0\). If we have \(p_i<0\)
-	here, we can replace \(p\) by \(\tilde{p}\) with the \(i\)-th entry replaced
-	by \(0\). We need to show, that \eqref{eq: x is max w.r.t. p} still holds for
-	\(\tilde{p}\). So let there be \(y\in X\) breaking \eqref{eq: x is max w.r.t.
-	p} for \(\tilde{p}\). As \(\tilde{p}_i=0\) we can w.l.o.g. assume that
-	this breaking \(y\) satisfies \(y^{(i)}=0\). But this implies
-	\[
-		\langle y, p\rangle
-		\overset{y_i=0}= \langle y, \tilde{p}\rangle
-		> \langle x, \tilde{p}\rangle
-		\overset{x_i=0}= \langle x, p\rangle,
-	\]
-	which is a contradiction, because \eqref{eq: x is max w.r.t. p} holds for 
-	the original \(p\).
 \end{proof}
 
 
