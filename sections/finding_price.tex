@@ -179,16 +179,125 @@ If \(S(p^*)\) and \(D(p^*)\) only contain a single element, one may write
 
 \subsection{Cloned Hermit Economy}
 
-In this subsection we are going to consider economies consisting of identical
-clones, to build intuition for the real deal.
+The total production capabilities of a society is given by the Minkowski sum of
+individual production capabilities
+\begin{equation}
+	\label{eq: tpc}\tag{TPC}
+	X = \{ x_1 + \dots + x_n : x_i \in X_i\} = \sum_{i=1}^n X_i
+\end{equation}
+If we split the spoils of production equally between everyone, then the set of
+possible consumption vectors is given by the average production capability
+\begin{equation}
+	\label{eq: apc}\tag{APC}
+	\bar{X}_n = \tfrac1n X = \{\tfrac{x}n : x\in X\}.
+\end{equation}
+In a society of identical clones, this is what we would expect to happen.
+
+\begin{lemma}[Clone Production Capabilities]
+	In a society of clones, we have \(X_1=\dots = X_n\).
+	to make the following two observations:
+	\begin{enumerate}
+		\item In general we have \(X_1\subseteq \bar{X}_n\).
+		\item If we assume that \(X_1\) is convex, then the average production
+		capability is always equal to the individual production capability
+		\[
+			\bar{X}_n = X_1
+		\]
+		\item Using only the \ref{eq: lower layer} property of \(X_1\) we get
+		\[
+			\bar{X}_n \to \conv(X_1),
+		\]
+		where \(\conv(M)\) is the convex hull\footnote{
+			The convex hull is defined as the set of all convex combinations
+			\[
+				\conv(M)= \Bigl\{\sum_{i=1}^m \lambda_i x_i : m\in\nat,\ x_i \in M,\ \lambda_i\in[0,1],\ \sum_{i=1}\lambda_i =1\Bigr\}
+			\]
+		} of the set \(M\) and we define
+		convergence of sets as follows: \(M_n\) converges to \(M\), if
+
+		\begin{enumerate}
+			\item\label{set-conv: seq} For all \(x\in M\) exists a sequence
+			\(x_n\in M_n\) with \(x_n\to x\).
+
+			\item\label{set-conv: incl} For all \(x\) in the interior \(M^\circ\)
+			of \(M\), exists \(n_0\in\nat\) such that \(x\in M_n\) for all \(n\ge
+			n_0\).
+		\end{enumerate}
+		The \ref{eq: lower layer} property is only needed for \ref{set-conv:
+		incl}.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+	\item For \(X_1 \subseteq \bar{X}_n\), we take \(x\in X_1\) and
+	observe that if we pick 
+	\[
+		x_1=\dots=x_n=x
+	\]
+	in the Minkowski sum we obtain \(n x \in X\). So we have
+	\(x\in\bar{X}_n\).
+	
+
+	\item
+	Equality in the convex case is almost trivial as well. Let \(x\in
+	\bar{X}_n\), then there exist \(x_1,\dots,x_n \in X_1\) such that \[
+		x = \frac1n \sum_{i=1}^n x_i = \sum_{i=1}^n \frac1n x_i
+		\overset{\text{convex}}\in X_1.
+	\]
+
+	\item
+	\begin{enumerate}
+		\item Pick \(x\in \conv(X_1)\). Since it is in the convex hull,
+		there exist \(\lambda_1,\dots,\lambda_m\) summing to unity, \(x_i\in X_1\)
+		with
+		\[
+			x = \sum_{i=1}^m \lambda_i x_i.
+		\]
+		We set the number of clones producing \(x_i\) to the largest integer smaller
+		\(n\lambda_i\)
+		\[
+			k_i^{(n)} := \lfloor n\lambda_i \rfloor.
+		\]
+		This is possible due to	
+		\[
+			\sum_{i=1}^m k_i^{(n)} \le n \sum_{i=1} \lambda_i = n.
+		\]
+		This results in
+		\[
+			x^{(n)}:= \frac1n\sum_{i=1}^m k_i x_i \in \bar{X}_n.
+		\]
+		Due to \(\frac{k_i^{(n)}}{n}\to \lambda_i\), we can conclude \(x^{(n)}\to
+		x\).
+		
+		\item
+		Pick any \(x=(x^{(1)},\dots,x^{(\dims)})\in\conv(X_1)^\circ\). Since it is
+		in the interior, there exists \(\epsilon>0\) such that
+		\[
+			x_{+\epsilon}
+			:= (x^{(1)}+\epsilon, \dots, x^{(\dims)}+\epsilon) \in \conv(X_1)^\circ.
+		\]
+		By \ref{set-conv: seq} we know there exists a sequence
+		\(x_n\in\bar{X}_n\) with \(x_n\to x_{+\epsilon}\), and therefore there exists
+		\(n_0\in\nat\) such that for all \(n\ge n_0\), \(x_n\) is included in the
+		\(\epsilon\) ball induced by the sup-norm around \(x_{+\epsilon}\). But this
+		implies \(x^{(i)} \le x^{(i)}_n\) for all \(n\ge n_0\). As the \ref{eq: lower
+		layer} property easily translates\footnote{
+			the lower layer property essentially allows us to throw away surplus. It
+			is intuitive that we can do that with the total output as well. To show
+			this mathematically we only need to distribute this ``throwing away''
+			action among the producers of the product we want to throw away.
+		} to the
+		Minkowski sum and the average production capabilities \(\bar{X}_n\), we
+		conclude \(x\in\bar{X}_n\) for all \(n\ge n_0\).
+		\qedhere
+	\end{enumerate}
+\end{enumerate}
+\end{proof}
 
 \begin{example*}[Pure Variable Cost]
 
 \end{example*}
-
-In the example above, trade did not offer an improvement over the lone hermit
-case. This is the case for convex \(X_i\) in general.
-Let us consider the case of concave production capabilities \(X_i\).
 
 \begin{figure}
 	\includegraphics[width=0.58\textwidth]{images/hermit-decision-setup-cost.jpeg}
