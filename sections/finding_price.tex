@@ -76,42 +76,6 @@ self-sufficiency. I.e. we get the following lemma.
 	\(y\) is also in the set on the right.
 \end{proof}
 
-\subsection{Supply and Demand}
-
-Before we move on, let us quickly define supply and demand. The demand of
-individual \(i\) is given by
-\[
-	D_i(p) := \{
-		y : (L,y)
-		\text{ is a solution to \eqref{eq: individual decision problem}}
-	\}.
-\]
-Notice that it is a set, since there might be multiple solutions. The same is
-true for the supply of individual \(i\)
-\[
-	S_i(p) := \argmax_{x\in X_i} \langle p, x\rangle 
-	\overset{(*)}= \nabla_p \mu(p, X_i).
-\]
-Where \((*)\) is a property of the support function \(\mu(\cdot,
-X_i)\)\fxnote{source or explanation}.
-We can then define total demand and supply
-\[
-	D(p) := \sum_{i=1}^n D_i(p),
-	\qquad
-	S(p) := \sum_{i=1}^n S_i(p),
-\]
-where the sums are Minkowski sums\footnote{
-	The Minkowski sum of set \(A\) and \(B\) is defined as
-	\[
-		A + B := \{ x+y : x\in A, y\in B\}
-	\]
-}.
-And \(p^*\) is a market equilibrium, if
-\[
-	S(p^*)\cap D(p^*)\neq\emptyset.
-\]
-If \(S(p^*)\) and \(D(p^*)\) only contain a single element, one may write
-\(S(p^*)=D(p^*)\).
 
 \begin{lemma}[Income in the Pure Variable Cost Case]
 	In the pure variable cost case \(L_i(x) = \langle l_i, x\rangle\), income
@@ -177,20 +141,27 @@ If \(S(p^*)\) and \(D(p^*)\) only contain a single element, one may write
 \end{example*}
 
 
-\subsection{Cloned Hermit Economy}
+\subsection{Aggregate Production Capabilities}
 
-The total production capabilities of a society is given by the Minkowski sum of
-individual production capabilities
+The total production capabilities of a society is given by the Minkowski sum\footnote{
+	The Minkowski sum of set \(A\) and \(B\) is defined as
+	\[
+		A + B := \{ x+y : x\in A, y\in B\}
+	\]
+}
+of individual production capabilities
 \begin{equation}
 	\label{eq: tpc}\tag{TPC}
 	X = \{ x_1 + \dots + x_n : x_i \in X_i\} = \sum_{i=1}^n X_i
 \end{equation}
+
 If we split the spoils of production equally between everyone, then the set of
 possible consumption vectors is given by the average production capability
 \begin{equation}
 	\label{eq: apc}\tag{APC}
 	\bar{X}_n = \tfrac1n X = \{\tfrac{x}n : x\in X\}.
 \end{equation}
+
 In a society of identical clones, this is what we would expect to happen.
 
 \begin{lemma}[Clone Production Capabilities]
@@ -330,3 +301,35 @@ variables.\fxnote{add reference}
 	for more production of good \(1\) if \(x^{(2)}=0\). The dotted line
 	represents the production frontier in the ``cloned hermit economy''.}
 \end{figure}
+
+\subsection{Supply and Demand}
+
+Before we move on, let us quickly define supply and demand. The demand of
+individual \(i\) is given by
+\[
+	D_i(p) := \{
+		y : (L,y)
+		\text{ is a solution to \eqref{eq: individual decision problem}}
+	\}.
+\]
+Notice that it is a set, since there might be multiple solutions. The same is
+true for the supply of individual \(i\)
+\[
+	S_i(p) := \argmax_{x\in X_i} \langle p, x\rangle 
+	\overset{(*)}= \nabla_p \mu(p, X_i).
+\]
+Where \((*)\) is a property of the support function \(\mu(\cdot,
+X_i)\)\fxnote{source or explanation}.
+We can then define total demand and supply
+\[
+	D(p) := \sum_{i=1}^n D_i(p),
+	\qquad
+	S(p) := \sum_{i=1}^n S_i(p),
+\]
+where the sums are Minkowski sums.
+And \(p^*\) is a market equilibrium, if
+\[
+	S(p^*)\cap D(p^*)\neq\emptyset.
+\]
+If \(S(p^*)\) and \(D(p^*)\) only contain a single element, one may write
+\(S(p^*)=D(p^*)\).
