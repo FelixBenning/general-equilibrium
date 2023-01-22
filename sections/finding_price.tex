@@ -274,19 +274,55 @@ extended pure variable cost case (with setup costs), where the costs are random
 variables.\fxnote{add reference}
 
 \begin{lemma}[Production Frontier]
-	If \(X\) is a closed, convex \ref{eq: lower layer}, then for any \(x\in
-	\partial X \cap \real_{>0}^\dims\) there exists \(p\in\real_{\ge 0}^\dims\)
-	such that
-	\[
-		x \in \argmax_{x\in X} \langle p, x\rangle = \nabla_p \mu(p, X)
-	\]
+	If \(X\) is a compact, convex \ref{eq: lower layer}, then for any \(x\in
+	\partial X\), there exists
+	\(p\in\real_{\ge 0}^\dims\) such that
+	\begin{equation}
+		\label{eq: prod frontier p}
+		x \in \argmax_{y\in X} \langle p, y\rangle %= \nabla_p \mu(p, X)
+	\end{equation}
 	and therefore
 	\[
 		\mu(p, X) = \langle p, x\rangle.
 	\]
+	If additionally \(x\in\real_{>0}^\dims\) then \(p\in\real_{\ge 0}^\dims\) is
+	necessary. If we only require \(x\in\real_{\ge 0}^\dims\), then there exists
+	a \(p\in\real_{\ge 0}^\dims\) satisfying \eqref{eq: prod frontier p}, but
+	other \(p\) might satisfy \eqref{eq: prod frontier p} with negative entries
+	where \(x\) has zero entries.
 \end{lemma}
 \begin{proof}
-	
+	Let \(x\in \partial X\), define \(A:=X^\circ\) and \(B:=\{x\}\). Then \(A\)
+	is open; \(A\) and \(B\) are disjoint, nonempty
+	convex subsets of \(\real^\dims\). So by the hyperplane separation theorem
+	there exists
+	\(p\in\real^\dims\) and \(c\in\real\) with
+	\[
+		\forall y\in A : \langle y, p\rangle < c
+		\qquad\text{and}\qquad
+		\langle x, p\rangle \ge c.
+	\]
+	Due to continuity of the scalar product we also have \(\langle y, p\rangle
+	\le c\) for all \(y\in X\). Since \(x\in X\) this implies
+	\begin{equation}
+		\label{eq: x is max w.r.t. p}
+		\langle y, p\rangle \le c = \langle x, p\rangle \quad \forall y\in X
+	\end{equation}
+	Therefore \(x\in\argmax_{y\in X} \langle p, y\rangle\) and \(\mu(p, X) =
+	\langle x, p\rangle\).
+
+	Let us now consider \(x=(x^{(1)},\dots,x^{(\dims)})\in\real_{>0}^\dims\).
+	To arrive at a contradiction, we assume \(p_i < 0\). Since \(x^{(i)}>0\) and
+	\(X\) is a \ref{eq: lower layer}, we can replace the entry \(x^{(i)}\) with
+	\(0\) to obtain \(\tilde{x}\in X\). Then
+	\[
+		\langle \tilde{x}, p\rangle
+		= \sum_{\substack{j=1\\i\neq j}} x^{(j)} p_j
+		> \underbrace{x^{(i)}}_{>0}\underbrace{p_i}_{<0}
+		+ \sum_{\substack{j=1\\i\neq j}} x^{(j)} p_j
+		= \langle x, p\rangle,
+	\]
+	which is a contradiction to \eqref{eq: x is max w.r.t. p}.
 \end{proof}
 
 
