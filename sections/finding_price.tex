@@ -272,6 +272,29 @@ is not trivial to do. Later we will consider the special case of an
 extended pure variable cost case (with setup costs), where the costs are random
 variables.\fxnote{add reference}
 
+\subsubsection{Production Frontier}
+
+We define the production frontier as the set of points which can not be
+achieved by producing a different vector and then throwing away things:
+\[
+	\pf(X) := \{ x\in X : \nexists y\in X \text{ with } x\prec y\}
+\]
+where \(x\prec y\) is defined to be \(x^{(i)} \le y^{(i)}\) for all \(i\) and
+there exists at least one \(i\) where the inequality is strict.
+
+\begin{lemma}[Production Frontier is part of the Boundary of X]
+	\label{lem: prod frontier part of boundary}
+	\[
+		\pf(X)\subseteq \partial X
+	\]
+\end{lemma}
+\begin{proof}
+	For any \(x=(x^{(1)},\dots, x^{(\dims)})\in X^\circ\) exists \(\epsilon>0\)
+	such that \(x_{+\epsilon} = (x^{(1)}+\epsilon, \dots, x^{(\dims)}+\epsilon)\)
+	is an element of \(X\). But then \(x\) can not be an element of \(\pf(X)\),
+	since \(x \prec x_{+\epsilon}\).
+\end{proof}
+
 \begin{lemma}[Duality of Support Function]
 	\label{lem: duality of support function}
 	If \(X\) is a compact, convex \ref{eq: lower
@@ -320,29 +343,6 @@ variables.\fxnote{add reference}
 		= \langle x, p\rangle,
 	\]
 	which is a contradiction to \eqref{eq: x is max w.r.t. p}.
-\end{proof}
-
-Note that \(0\) is also in \(\partial X\), but not necessarily what we would
-call a production frontier. So let us define the production frontier as the set
-of points which can not be achieved by producing a different vector and then
-throwing away things:
-\[
-	\pf(X) = \{ x\in X : \nexists y\in X \text{ with } x\prec y\}
-\]
-where \(x\prec y\) is defined to be \(x^{(i)} \le y^{(i)}\) for all \(i\) and
-there exists at least one \(i\) where the inequality is strict.
-
-\begin{lemma}[Production Frontier is part of the Boundary of X]
-	\label{lem: prod frontier part of boundary}
-	\[
-		\pf(X)\subseteq \partial X
-	\]
-\end{lemma}
-\begin{proof}
-	For any \(x=(x^{(1)},\dots, x^{(\dims)})\in X^\circ\) exists \(\epsilon>0\)
-	such that \(x_{+\epsilon} = (x^{(1)}+\epsilon, \dots, x^{(\dims)}+\epsilon)\)
-	is an element of \(X\). But then \(x\) can not be an element of \(\pf(X)\),
-	since \(x \prec x_{+\epsilon}\).
 \end{proof}
 
 \begin{lemma}[Production Frontier Characterization]
