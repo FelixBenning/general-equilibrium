@@ -1,0 +1,61 @@
+\section{Support Function}
+
+\begin{lemma}[Convexity]
+	The support function \(\mu\) is convex.	
+\end{lemma}
+\begin{proof}
+	Let \(p,q \in \real^\dims\) and \(\lambda\in[0,1]\), then
+	\begin{align*}
+		\mu(\lambda p + (1-\lambda)q , X)
+		&= \sup\{\lambda \langle  p , x\rangle + (1-\lambda)\langle q, x\rangle : x\in X\}\\
+		&\le \lambda \sup\{\langle p, x\rangle :x\in X\}
+		+ (1-\lambda) \sup\{\langle q, y\rangle : y \in X\}\\
+		&= \lambda \mu(p, X)+ (1-\lambda)\mu(q, X)
+		\qedhere
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Subgradient]
+	Let \(f:\real^\dims\to \real\) be a convex function. The subgradient
+	\(\partial f\) of \(f\) is then defined as a set-valued function, by
+	\[
+		\partial f(x_0)
+		:= \{
+			v\in \real^\dims :
+			f(x)-f(x_0) \ge \langle v, x-x_0\rangle
+			\quad \forall x\in\real^\dims
+		\}
+	\]
+\end{definition}
+
+You can interpret the set of subgradients \(v\in\partial f(x_0)\) as the
+set of slopes a lower tangent at \(x_0\) may have, by reordering the requirement
+\[
+	f(x) \ge \underbrace{f(x_0) + \langle v, x-x_0\rangle}_{\text{tangent}}.
+\]
+
+\begin{lemma}[Subgradients of Support Functions]
+	\[
+		\argmax_{x\in X}\langle p, X\rangle \subseteq \partial_p \mu(p, X)
+	\]
+\end{lemma}
+\begin{proof}
+	Let \(x^* \in \argmax_{x\in X}\langle p, X\rangle\). Then by definition
+	\begin{equation}
+		\label{eq: x^* is opt w.r.t. p}
+		\mu(p, X) = \langle p, x^*\rangle
+	\end{equation}
+	and
+	\begin{equation}
+		\label{eq: support function is sup}
+		\mu(q, X) \ge \langle q, x^*\rangle \quad \forall q\in\real^\dims.
+	\end{equation}
+	subtracting \eqref{eq: x^* is opt w.r.t. p} from \eqref{eq: support function is sup}
+	results in
+	\[
+		\mu(q, X) - \mu(p, X)
+		\ge \langle q, x^*\rangle - \langle p, x^*\rangle
+		= \langle x^*, q-p\rangle.
+	\]
+	So by definition of the subgradient \(x^*\in \partial_p \mu(p, X)\).
+\end{proof}
