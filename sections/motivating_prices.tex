@@ -219,32 +219,146 @@ self-sufficiency. I.e. we get the following lemma.
 	and finally positivity of entries of \(p\) and \(l_i\) again.
 \end{proof}
 
-\begin{example*}[Pure Variable Cost Case]
-	The individual decision problem \eqref{eq: individual decision problem}
-	therefore becomes
+While the pure variable cost case already lends itself to specialization, unless
+multiple wage options \(w_i^{(j)}\) are identical, adding fixed costs truly
+encourages specialization. For fixed costs \(f_i\) the production capability
+of person \(i\) can be written as 
+\[
+	X_i = \{
+		x\in \real_{\ge 0}^\dims
+		: \langle l_i, x\rangle
+		+ \underbrace{
+			\sum_{j=1}^\dims f_i^{(j)}\ind_{x^{(j)}>0}
+		}_{=: \langle f_i, \ind_{>0}\rangle} \le L_i
+	\}.
+\]
+
+\begin{lemma}[Income in Variable \& Fixed Cost Case]
+	We assume the person is able to produce any product. So none of the fixed
+	costs \(f_i^{(j)}\) take longer than the total labour time \(L_i\) (i.e.
+	\(L_i - f_i^{(j)} > 0\)). In this mixed case, income of person \(i\) can be
+	written as		
 	\[
-		\max_{L_i, y} u(1-L_i, y) \text{ s.t. } \langle p, y\rangle \le L_i \|w_i\|_\infty
+		\mu(p, X_i)
+		= L_i \max_{j=1,\dots,d}\underbrace{\frac{p_j}{\bar{l}_i^{(j)}}}_{=:w_i^{(j)}}
+		= L_i \|w_i\|_\infty,
 	\]
-	or in other words
+	where the average labour cost \(\bar{l}_i^{(j)}\) of person \(i\) of
+	specialization \(j\) is given by
 	\[
-		\max_{y} u\left(1- \frac{\langle p, y\rangle}{\|w_i\|_\infty}, y\right).
+		\bar{l}_i^{(j)}
+		:= l_i^{(j)}\Bigl[1+\frac{f_i^{(j)}}{L_i-f_i^{(j)}}\Bigr]
+		= l_i^{(j)}\Bigl[1+\frac{1}{L_i/f_i^{(j)}-1}\Bigr]
 	\]
-	The first order condition is therefore
+\end{lemma}
+\begin{proof}
+	For a subset \(J\subseteq\{1,\dots,\dims\}\) define the subspace
 	\[
-		\frac{du}{dy} 
-		= u_f\Bigl[
-			\underbrace{\frac{u_y}{u_f}}_{\text{wtw}}
-			- \overbrace{\frac{p}{\|w_i\|_\infty}}^{\text{effort required}}
-		\Bigr]
-		= \frac{u_f}{\|w_i\|_\infty}\Bigl[
-			\underbrace{\frac{u_y}{u_f}\|w_i\|_\infty}_{\text{wtp}}
-			- p
-		\Bigr]
+		\real_{>0}^J:= \{
+			x\in \real^\dims:
+			x^{(j)} > 0\ \forall j\in J;\;\; x_j =0\ \forall j\notin J
+		\}.
 	\]
-	Where the ``willingness to pay'' (wtp) is simply the willingness to work
-	(wtw) scaled by person \(i\)'s wages.
-	
-\end{example*}
+	Then we can partition our maximization problem by these \(J\) like this:
+	\begin{align*}
+		\mu(p, X_i)
+		&= \max_{x\ge 0}\langle p, x\rangle \text{ s.t. }
+		\langle x, l_i\rangle  + \langle f_i, \ind_{>0}\rangle \le L_i\\
+		&= \max_{J \subseteq \{1,\dots,\dims\}}
+		\max_{x\in \real_{>0}^J}
+		\langle p, x\rangle \text{ s.t. } \langle x, l_i\rangle \le L_i - \sum_{j\in J}f_i^{(j)}
+	\end{align*}	
+	We can relax the inner maximization problem to obtain the pure variable
+	optimization problem embedded in \(\real^I\)
+	\begin{align*}
+		&\max_{x\in \real_{>0}^J}
+		\langle p, x\rangle \text{ s.t. }
+		\langle x, l_i\rangle \le L_i - \sum_{j\in J}f_i^{(j)}\\
+		&\le 
+		\max_{x\in \real_{{\color{red} \ge} 0}^J}
+		\langle p, x\rangle \text{ s.t. }
+		\langle x, l_i\rangle \le L_i - \sum_{j\in J}f_i^{(j)}\\
+		&= \Bigl(L_i - \sum_{j\in J}f_i^{(j)}\Bigr)
+		\max_{j\in J} \frac{p_j}{l_i^{(j)}}
+	\end{align*}
+	So in total, we have
+	\begin{align*}
+		\mu(p, X_i)
+		&\le \max_{\emptyset \neq J\subseteq \{1,\dots,\dims\}}
+		\Bigl(L_i - \sum_{j\in J}f_i^{(j)}\Bigr)
+		\max_{j\in J} \frac{p_j}{l_i^{(j)}}\\
+		&= \max_{j=1,\dots,\dims}
+		(L_i - f_i^{(j)}) \frac{p_j}{l_i^{(j)}}.
+	\end{align*}
+	To see that this upper bound is actually tight, consider producing
+	exclusively \(j\). Then we have
+	\[
+		l_i^{(j)} x^{(j)} + f_i^{(j)} = L_i \iff x^{(j)} = \frac{L_i-f_i^{(j)}}{l_i^{(j)}}.
+	\]
+	Optimizing over different specializations yields
+	\[
+		\mu(p, X_i) \ge \max_{j=1,\dots,\dims} p_j x^{(j)}
+		= \max_{j=1,\dots,\dims}
+		p_j \frac{L_i - f_i^{(j)}}{l_i^{(j)}}.
+	\]
+	The average labour cost of specialization \(j\) is moreover given by
+	\[
+		\bar{l}_i^{(j)}
+		= \frac{L_i}{x^{(j)}}
+		= \frac{l_i^{(j)} x^{(j)} + f_i^{(j)}}{x^{(j)}}
+		= l_i^{(j)} + \frac{f_i^{j}}{\left(\frac{L_i-f_i^{(j)}}{l_i^{(j)}}\right)}
+		= l_i^{(j)} \Bigl[1 + \frac{f_i^{j}}{L_i-f_i^{(j)}}\Bigr].
+	\]
+	In summary we have
+	\[
+		\mu(p, X_i)
+		= L_i \max_{j=1,\dots,\dims} p_j \frac{x^{(j)}}{L_i}
+		= L_i \max_{j=1,\dots,\dims} \frac{p_j}{\bar{l}_i^{(j)}}.
+		\qedhere
+	\]
+\end{proof}
+
+By talking about average costs \(\bar{l}_i^{(j)}\) in place of variable costs
+\(l_i^{(j)}\), we therefore salvaged the results from the pure variable
+cost case. But no matter how the wage \(\|w_i\|_\infty\) comes to be, the
+individual decision problem \eqref{eq: individual decision problem} becomes
+\[
+	\max_{L_i, y} u(1-L_i, y) \text{ s.t. } \langle p, y\rangle \le L_i \|w_i\|_\infty
+\]
+or in other words
+\[
+	\max_{y} u\left(1- \frac{\langle p, y\rangle}{\|w_i\|_\infty}, y\right).
+\]
+The first order condition is therefore
+\[
+	\frac{du}{dy} 
+	= u_f\Bigl[
+		\underbrace{\frac{u_y}{u_f}}_{\text{wtw}}
+		- \overbrace{\frac{p}{\|w_i\|_\infty}}^{\text{effort required}}
+	\Bigr]
+	= \frac{u_f}{\|w_i\|_\infty}\Bigl[
+		\underbrace{\frac{u_y}{u_f}\|w_i\|_\infty}_{\text{wtp}}
+		- p
+	\Bigr]
+\]
+Where the ``willingness to pay'' (wtp) is simply the willingness to work
+(wtw) scaled by person \(i\)'s wages.
+
+Careful readers might have noticed, that
+this calculation is not quite accurate in the mixed case. Because the average costs
+depend on \(L_i\), which in turn makes \(\|w_i\|_\infty\) dependent on \(L_i\).
+What is interesting to note here, is that (hourly) wages increase with total
+labour time \(L_i\), as average cost decrease with \(L_i\). The size of this
+effect increases with the size of the fixed costs. If the fixed costs are close
+to \(L_i\) small decreases of \(L_i\) might make producing \(j\) completely
+unviable, but at the very least cut heavily into the little time left for
+actually producing \(j\). Or in other words average costs have singularities at
+\(f_i^{(j)}\)
+\[
+	\lim_{L_i\downarrow f_i^{(j)}} \bar{l}_i^{(j)}
+	= \lim_{L_i\downarrow f_i^{(j)}}l_i^{(j)}\Bigl[1+\frac{1}{L_i/f_i^{(j)}-1}\Bigr]
+	= \infty
+\]
 
 \begin{example*}[Pure Variable Cost case with Identical Production Capabilities]
 
