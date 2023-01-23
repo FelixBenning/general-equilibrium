@@ -331,7 +331,21 @@ throwing away things:
 \]
 where \(x\prec y\) is defined to be \(x^{(i)} \le y^{(i)}\) for all \(i\) and
 there exists at least one \(i\) where the inequality is strict.
-\begin{lemma}[Production Frontier]
+
+\begin{lemma}[Production Frontier is part of the Boundary of X]
+	\label{lem: prod frontier part of boundary}
+	\[
+		\pf(X)\subseteq \partial X
+	\]
+\end{lemma}
+\begin{proof}
+	For any \(x=(x^{(1)},\dots, x^{(\dims)})\in X^\circ\) exists \(\epsilon>0\)
+	such that \(x_{+\epsilon} = (x^{(1)}+\epsilon, \dots, x^{(\dims)}+\epsilon)\)
+	is an element of \(X\). But then \(x\) can not be an element of \(\pf(X)\),
+	since \(x \prec x_{+\epsilon}\).
+\end{proof}
+
+\begin{lemma}[Production Frontier Characterization]
 	If \(X\) is a compact, convex \ref{eq: lower layer}, then
 	\[
 		\bigcup_{p\in \real_{>0}^\dims} \argmax_{y\in X}\langle p, y\rangle
@@ -355,13 +369,6 @@ there exists at least one \(i\) where the inequality is strict.
 	\[
 		\bigcup_{p\in \real_{>0}^\dims} \argmax_{y\in X}\langle p, y\rangle \subseteq \pf(X).
 	\]
-	It is immediately clear that \(\pf(X)\subseteq \partial X\). Because for any
-	\[
-		x=(x^{(1)},\dots, x^{(\dims)})\in X^\circ,
-	\]
-	exists \(\epsilon>0\) such that \(x_{+\epsilon} = (x^{(1)}+\epsilon, \dots,
-	x^{(\dims)}+\epsilon)\) is an element of \(X\). But then \(x\) can not be an
-	element of \(\pf(X)\), since \(x \prec x_{+\epsilon}\).
 
 	Now let \(x\in \pf(X)\). If \(0\in\pf(X)\), then \(X=\{0\}\). So without loss
 	of generality let \(x\neq 0\) and \(I\) be the set of indices \(i\) where
@@ -369,21 +376,23 @@ there exists at least one \(i\) where the inequality is strict.
 	\[
 		\real^I := \{y\in \real^\dims : y^{(i)} = 0, \quad \forall i \in I^\complement\}
 	\]
-	which can be identified with \(\real^{|I|}\). It is easy to check that
+	which can be identified with \(\real^{|I|}\). \(X\cap\real^I\) is a compact,
+	convex \ref{eq: lower layer} again and it is straightforward to verify
 	\[
-		\pf(X)\cap \real^I \subseteq \pf(X\cap \real^I),
+		x\in \pf(X)\cap \real^I
+		\subseteq \pf(X\cap \real^I)
+		\overset{\text{Lem.~\ref{lem: prod frontier part of boundary}}}\subseteq
+		\partial(X\cap\real^I).
 	\]
-	so \(x\) is included in \(\pf(X\cap \real^I)\subseteq
-	\partial(X\cap\real^I)\). Additionally \(X\cap\real^I\) is a compact, convex
-	\ref{eq: lower layer}, so by Lemma~\ref{lem: duality of support function}
-	there exists \(p\in \real^I\setminus \{0\}\), such that 
+	So by Lemma~\ref{lem: duality of support function} there exists \(p\in
+	\real^I\setminus \{0\}\), such that 
 	\begin{equation}
 		\label{eq: x is optimal w.r.t. p on subspace}
 		x\in \argmax_{y\in X\cap\real^I} \langle p, y\rangle.
 	\end{equation}
 	And as \(x\in\real_{>0}^I\) by definition of \(I\), we have \(0\neq
 	p\in\real_{\ge 0}^I\). Interpreting \(p\) as a member of \(\real_{\ge
-	0}^\dims\) again, we want to show that for this \(p\)
+	0}^\dims\) again, we can finish this proof if we can show that for this \(p\)
 	\[
 		x\in\argmax_{y\in X}\langle p, y\rangle.
 	\]
