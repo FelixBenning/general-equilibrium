@@ -273,6 +273,7 @@ extended pure variable cost case (with setup costs), where the costs are random
 variables.\fxnote{add reference}
 
 \begin{lemma}[Duality of Support Function]
+	\label{lem: duality of support function}
 	If \(X\) is a compact, convex \ref{eq: lower
 	layer}, then for any \(x\in \partial X\), there exists
 	\(p\neq 0\) such that
@@ -326,16 +327,78 @@ call a production frontier. So let us define the production frontier as the set
 of points which can not be achieved by producing a different vector and then
 throwing away things:
 \[
-	\pf(X) = \{ x\in X : \nexists y\in X \text{ with } x\preceq y\}
+	\pf(X) = \{ x\in X : \nexists y\in X \text{ with } x\prec y\}
 \]
+where \(x\prec y\) is defined to be \(x^{(i)} \le y^{(i)}\) for all \(i\) and
+there exists at least one \(i\) where the inequality is strict.
 \begin{lemma}[Production Frontier]
 	If \(X\) is a compact, convex \ref{eq: lower layer}, then
 	\[
-		\pf(X) = \overline{\partial X \cap \real_{>0}^\dims}
-	\]\fxnote{is \(p\ge 0\) still true then?}
+		\bigcup_{p\in \real_{>0}^\dims} \argmax_{y\in X}\langle p, y\rangle
+		\subseteq \pf(X) \subseteq
+		\bigcup_{p\in \real_{\ge 0}^\dims\setminus\{0\}}
+		\argmax_{y\in X}\langle p, y\rangle.
+	\]
+	Where the first subset property does not actually require any restrictions on
+	\(X\).
 \end{lemma}
 \begin{proof}
-	
+	For any \(p\in\real_{>0}^\dims\) we have
+	\[
+		\argmax_{y\in X}\langle p, y\rangle \subseteq \pf(X).
+	\]
+	Because if we take any \(x\) from the first
+	set, and assume there would exist \(x_+\in X\) with \(x\prec x_+\), then we
+	would have \(\langle x, p\rangle < \langle x_+, p\rangle\) following from
+	\(p\in \real_{>0}^\dims\). But that is a contradiction. Therefore
+	\(x\in\pf(X)\). Taking the union over all such \(p\) implies
+	\[
+		\bigcup_{p\in \real_{>0}^\dims} \argmax_{y\in X}\langle p, y\rangle \subseteq \pf(X).
+	\]
+	It is immediately clear that \(\pf(X)\subseteq \partial X\). Because for any
+	\[
+		x=(x^{(1)},\dots, x^{(\dims)})\in X^\circ,
+	\]
+	exists \(\epsilon>0\) such that \(x_{+\epsilon} = (x^{(1)}+\epsilon, \dots,
+	x^{(\dims)}+\epsilon)\) is an element of \(X\). But then \(x\) can not be an
+	element of \(\pf(X)\), since \(x \prec x_{+\epsilon}\).
+
+	Now let \(x\in \pf(X)\). If \(0\in\pf(X)\), then \(X=\{0\}\). So without loss
+	of generality let \(x\neq 0\) and \(I\) be the set of indices \(i\) where
+	\(x^{(i)}\neq 0\). We now consider the subspace
+	\[
+		\real^I := \{y\in \real^\dims : y^{(i)} = 0, \quad \forall i \in I^\complement\}
+	\]
+	which can be identified with \(\real^{|I|}\). It is easy to check that
+	\[
+		\pf(X)\cap \real^I \subseteq \pf(X\cap \real^I),
+	\]
+	so \(x\) is included in \(\pf(X\cap \real^I)\subseteq
+	\partial(X\cap\real^I)\). Additionally \(X\cap\real^I\) is a compact, convex
+	\ref{eq: lower layer}, so by Lemma~\ref{lem: duality of support function}
+	there exists \(p\in \real^I\setminus \{0\}\), such that 
+	\begin{equation}
+		\label{eq: x is optimal w.r.t. p on subspace}
+		x\in \argmax_{y\in X\cap\real^I} \langle p, y\rangle.
+	\end{equation}
+	And as \(x\in\real_{>0}^I\) by definition of \(I\), we have \(0\neq
+	p\in\real_{\ge 0}^I\). Interpreting \(p\) as a member of \(\real_{\ge
+	0}^\dims\) again, we want to show that for this \(p\)
+	\[
+		x\in\argmax_{y\in X}\langle p, y\rangle.
+	\]
+	Assume that this were not the case. Then there would exist \(x_+\in X\)
+	such that
+	\[
+		\sum_{i\in I}p_i x^{(i)}
+		= \langle p, x\rangle
+		< \langle p, x_+\rangle
+		\overset{p\in\real^I}= \sum_{i\in I} p_i x_+^{(i)}
+	\]
+	As the \(x^{(i)}_+\) for \(i\notin I\) do not contribute to the scalar product,
+	we can w.l.o.g. replace them with \(0\) due to the lower layer property.
+	But then \(x_+\in X\cap \real^I\), which is a contradiction to \eqref{eq: x
+	is optimal w.r.t. p on subspace}.
 \end{proof}
 
 
