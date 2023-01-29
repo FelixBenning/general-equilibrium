@@ -1,0 +1,34 @@
+\section{General Equilibrium}
+
+
+\subsection{Supply and Demand}
+
+Before we move on, let us quickly define supply and demand. The demand of
+individual \(i\) is given by
+\[
+	D_i(p) := \{
+		y : (L,y)
+		\text{ is a solution to \eqref{eq: individual decision problem}}
+	\}.
+\]
+Notice that it is a set, since there might be multiple solutions. The same is
+true for the supply of individual \(i\)
+\[
+	S_i(p) := \argmax_{x\in X_i} \langle p, x\rangle 
+	\overset{(*)}= \nabla_p \mu(p, X_i).
+\]
+Where \((*)\) is a property of the support function \(\mu(\cdot,
+X_i)\)\fxnote{source or explanation}.
+We can then define total demand and supply
+\[
+	D(p) := \sum_{i=1}^n D_i(p),
+	\qquad
+	S(p) := \sum_{i=1}^n S_i(p),
+\]
+where the sums are Minkowski sums.
+And \(p^*\) is a market equilibrium, if
+\[
+	S(p^*)\cap D(p^*)\neq\emptyset.
+\]
+If \(S(p^*)\) and \(D(p^*)\) only contain a single element, one may write
+\(S(p^*)=D(p^*)\).
