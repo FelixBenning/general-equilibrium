@@ -138,6 +138,7 @@ But as we will see, there are some price vectors, which do ensure \(S=D\).
 We call these economic equilibria.
 
 \subsection{Money Supply and Price Stability}
+\label{subsec: money supply and price stability}
 
 Since everyone simply ensures that their income is equal to their expenses, i.e.
 that \(S_i - D_i\) is orthogonal to \(p\)
@@ -239,7 +240,8 @@ individual decision problem of person \(i\) therefore becomes
 \begin{equation}
 	\tag{IDP}
 	\label{eq: individual decision problem}
-	\max_{L_i, y} u(1-L_i, y) \quad\text{subject to}\quad \langle y, p\rangle \le \mu(p, X_i(L_i))
+	\max_{L_i, y} u(1-L_i, y) \quad\text{s.t.}\quad
+	\langle y, p\rangle \le \mu(p, X_i(L_i))
 \end{equation}
 In Figure~\ref{fig: consumption increase by trade} we can see, how this
 constraint is always weaker than \(y\in X_i(L_i)\), which is the constraint of
@@ -263,7 +265,7 @@ self-sufficiency. I.e. we get the following lemma.
 	\(y\) is also in the set on the right.
 \end{proof}
 
-\subsubsection{Income in Special Cases}
+\subsubsection{Income in the Pure Variable Cost Case}
 
 \begin{lemma}[Income in the Pure Variable Cost Case]
 	In the pure variable cost case \(L_i(x) = \langle l_i, x\rangle\), income
@@ -301,6 +303,8 @@ self-sufficiency. I.e. we get the following lemma.
 	and finally positivity of entries of \(p\) and \(l_i\) again.
 \end{proof}
 
+\subsubsection{Income with Fixed Costs}
+
 While the pure variable cost case already lends itself to specialization, unless
 multiple wage options \(w_i^{(j)}\) are identical, adding fixed costs truly
 encourages specialization. For fixed costs \(f_i\) the production capability
@@ -322,7 +326,8 @@ of person \(i\) can be written as
 	written as		
 	\[
 		\mu(p, X_i)
-		= L_i \max_{j=1,\dots,d}\underbrace{\frac{p_j}{\bar{l}_i^{(j)}}}_{=:w_i^{(j)}}
+		= L_i \max_{j=1,\dots,d}
+		\underbrace{\frac{p_j}{\bar{l}_i^{(j)}}}_{=:w_i^{(j)}}
 		= L_i \|w_i\|_\infty,
 	\]
 	where the average labour cost \(\bar{l}_i^{(j)}\) of person \(i\) of
@@ -348,7 +353,8 @@ of person \(i\) can be written as
 		\langle x, l_i\rangle  + \langle f_i, \ind_{>0}\rangle \le L_i\\
 		&= \max_{J \subseteq \{1,\dots,\dims\}}
 		\max_{x\in \real_{>0}^J}
-		\langle p, x\rangle \text{ s.t. } \langle x, l_i\rangle \le L_i - \sum_{j\in J}f_i^{(j)}
+		\langle p, x\rangle \text{ s.t. }
+		\langle x, l_i\rangle \le L_i - \sum_{j\in J}f_i^{(j)}
 	\end{align*}	
 	We can relax the inner maximization problem to obtain the pure variable
 	optimization problem embedded in \(\real^I\)
@@ -375,7 +381,8 @@ of person \(i\) can be written as
 	To see that this upper bound is actually tight, consider producing
 	exclusively \(j\). Then we have
 	\[
-		l_i^{(j)} x^{(j)} + f_i^{(j)} = L_i \iff x^{(j)} = \frac{L_i-f_i^{(j)}}{l_i^{(j)}}.
+		l_i^{(j)} x^{(j)} + f_i^{(j)} = L_i \iff x^{(j)}
+		= \frac{L_i-f_i^{(j)}}{l_i^{(j)}}.
 	\]
 	Optimizing over different specializations yields
 	\[
@@ -400,7 +407,7 @@ of person \(i\) can be written as
 \subsubsection{The Individual Decision Problem in the Mixed Case}
 
 By talking about average costs \(\bar{l}_i^{(j)}\) in place of variable costs
-\(l_i^{(j)}\), we therefore salvaged the results from the pure variable
+\(l_i^{(j)}\), we salvaged the results from the pure variable
 cost case. But no matter how the wage \(\|w_i\|_\infty\) comes to be, the
 individual decision problem \eqref{eq: individual decision problem} becomes
 \[
@@ -426,9 +433,9 @@ Where the ``willingness to pay'' (wtp) is simply the willingness to work
 (wtw) scaled by person \(i\)'s wages.
 
 Careful readers might have noticed, that
-this calculation is not quite accurate in the mixed case. Because the average costs
-depend on \(L_i\), which in turn makes \(\|w_i\|_\infty\) dependent on \(L_i\).
-So by the product rule, the effort required would be
+this calculation is not quite accurate in the mixed case. Because the average
+costs depend on \(L_i\), which in turn makes \(\|w_i\|_\infty\) dependent on
+\(L_i\). So by the product rule, the effort required would be
 \[
 		\frac{dL_i}{dy}
 		= \frac{d}{dy} \frac{\langle p, y\rangle}{\|w_i\|_\infty}
@@ -448,7 +455,8 @@ Joining the \(\frac{dL_i}{dy}\) on both sides results in
 		\frac{d\|w_i\|_\infty}{dL_i}
 	}.
 \]
-Where \(\|w_i\|_\infty=\max_{j} w_i^{(j)}\) is piecewise differentiable with derivatives
+Where \(\|w_i\|_\infty=\max_{j} w_i^{(j)}\) is piecewise differentiable with
+derivatives
 \[
 	\frac{dw_i^{(j)}}{dL_i}
 	= \frac{d}{dL_i} \frac{p_j}{\bar{l}_i^{(j)}}
@@ -496,6 +504,52 @@ The willingness to pay is therefore given by
 
 \subsection{Prices in Societies of Clones}
 
-\begin{example*}[Pure Variable Cost case with Identical Production Capabilities]
+Let us consider the mixed cost case and assume that everyone has the exact same
+production capabilities (i.e. \(\bar{l}^{(j)} = \bar{l}_i^{(j)}\) for all
+\(i\)). Then everyone's potential wages are identical
+\[
+	w_i^{(j)} = \frac{p_j}{\bar{l}^{(j)}} =: w^{(j)}.
+\]
+People will therefore only produce good \(j\) if \(w^{(j)} = \| w\|_\infty\).
+If a society wants to consume a little of every good, every good needs to be
+produced. But this implies all \(w^{(j)}\) have to be identical to
+\(\|w\|_\infty\). This implies
+\[
+	\|w\|_\infty = \frac{p_j}{\bar{l}^{(j)}},
+\]
+and thus \(p_j = \bar{l}^{(j)}\|w\|_\infty\). Up to the factor \(\|w\|_\infty\)
+of wages, we therefore fully determined prices. And as we argued in
+Section~\ref{subsec: money supply and price stability}, we lose this degree of
+freedom to the money supply. In fact by
+\[
+	\langle p, S\rangle = MV = \text{GDP}
+\]
+we can determine wages to be
+\[
+	\|w\|_\infty = \frac{\text{GDP}}{\langle \bar{l}, S\rangle}
+	= \frac{\text{sum of money transactions}}{\text{time required to produce }S}.
+\]
+Where the transactions might be denoted in \$, the time might be denoted in
+hours \(h\) and the wage is therefore denoted in \(\$/h\). Notice how
+\(60 \text{min}/h\) has almost the same format. This is no coincidence. Since
+everyone takes the same amount of time \(\bar{l}^{(j)}\) to produce good \(j\)
+the \(\$\) value is literally a unit of time.
 
-\end{example*}
+Once you break the assumption that all \(\bar{l}_i^{(j)}\) are identical, this
+ceases to be the case. An easy generalization is when \(\bar{l}_i^{(j)}\) are
+simply multiples of one another. In this case, the wage options are also
+multiples. So we still need to require that they are all equal otherwise some 
+good is not produced. This finally results in
+\[
+	p_j = \bar{l}_i^{(j)}\|w_i\|_\infty.
+\]
+In this case \(\|w_i\|_\infty\) can still be used as a subjective unit of time
+(different for every person \(i\)).
+
+The takeaway is: if it is obvious how the effort behind good \(j\) should be
+valued, then the only price equilibrium is in fact this obvious valuation.
+Prices should therefore be viewed as measures of effort.
+
+But typically people are not just better in everything. Which means that the
+measure of value \(p\) will finally need to depart from the measure of time
+\(\bar{l}_i\).
