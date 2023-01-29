@@ -21,6 +21,13 @@ there exists at least one \(i\) where the inequality is strict.
 	since \(x \prec x_{+\epsilon}\).
 \end{proof}
 
+To characterize the production frontier further, we are going to assume
+convexity of \(X\). We have motivated the asymptotic convexity of the
+average production capabilities \(\bar{X}_n\) in Lemma~\ref{lem: clone prod
+cap}. While this asymptotic convexity does not translate to convexity of \(X\)
+one could easily replace \(X\) with \(\bar{X}_n\) in the following, at the
+expense of notational simplicity.
+
 \begin{lemma}[Duality of Support Function]
 	\label{lem: duality of support function}
 	If \(X\) is a compact, convex \ref{eq: lower
@@ -71,7 +78,7 @@ there exists at least one \(i\) where the inequality is strict.
 	which is a contradiction to \eqref{eq: x is max w.r.t. p}.
 \end{proof}
 
-\begin{lemma}[Production Frontier Characterization]
+\begin{theorem}[Production Frontier Characterization]
 	If \(X\) is a compact, convex \ref{eq: lower layer}, then
 	\[
 		\bigcup_{p\in \real_{>0}^\dims} \argmax_{y\in X}\langle p, y\rangle
@@ -86,7 +93,7 @@ there exists at least one \(i\) where the inequality is strict.
 	The second subset property can be interpreted as: For any point \(x\) on the
 	production frontier, there exist non-negative prices \(p\) such that
 	maximization with regards to \(p\) leads to production of \(x\).
-\end{lemma}
+\end{theorem}
 \begin{proof}
 	For any \(p\in\real_{>0}^\dims\) we have
 	\[

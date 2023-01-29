@@ -32,10 +32,11 @@ Unfortunately it is difficult to compare the size of two vectors \(S_i\) and
 then we are back to hermits, since everyone is using only what they produce.
 
 To make the products comparable again, we could measure them by the time it took
-to produce them. But the time needed to produce good \(j\), \(l_i^{(j)}\), might
-be different for every person \(i\). Additionally this time is private
-information of person \(i\). Especially if we generalize it to be a discomfort
-measure instead of strictly time.
+to produce them. In other words the effort required for them. But recall that
+the time needed to produce good \(j\), \(l_i^{(j)}\), might be different for
+every person \(i\). Additionally this time is private information of person
+\(i\). Especially if we generalize it to be a discomfort measure instead of
+strictly time.
 
 
 \begin{example}[Definitely not Capitalism]
@@ -91,29 +92,33 @@ measure instead of strictly time.
 	communal holding space instead of conducting exchanges \emph{decentrally}.
 \end{remark}
 
+\subsection{Prices as a Measure of Effort}
+
 In the hopes that we justified ownership, trade and prices sufficiently, let us
-consider this in more detail. We have suggested using \(l^{(j)}_i\) as prices.
-This implies that one good \(j\) has different prices, depending on the producer
-\(i\). Since we assume that there are no quality differences, people will
-obviously buy the cheaper products first. Let \(p_j\) be the largest price for
-which good \(j\) is ever sold. Potential producers \(i\) with \(l^{(j)}_i > p_j\)
-refrain from producing good \(j\) and focus their attention on other products.
+consider this in more detail. We have suggested using \(l^{(j)}_i\) as prices
+(i.e. the effort required for production).  This implies that one good \(j\) has
+different prices, depending on the producer \(i\). Since we assume that there
+are no quality differences, people will obviously buy the cheaper products
+first. Let \(p_j\) be the largest price for which good \(j\) is ever sold.
+Potential producers \(i\) with \(l^{(j)}_i > p_j\) refrain from producing good
+\(j\) and focus their attention on other products.
 
 The producers with \(l^{(j)}_i < p_j\) now see, that they could have sold their
 goods for more. And since the cost of production \(l^{(j)}_i\) is private
 information, they will likely claim that this cost went up a little next time.
 I.e. in the long run, only one prices \(p_j\) per good \(j\) is stable.
-
-\subsection{Finding the Right Prices}
-
+\begin{quotation}
+\noindent Price \(p_j\) roughly measures the effort required to produce \(j\) by
+the least efficient producer of \(j\).
+\end{quotation}
 
 The question remains: What is the right price? Should we average the
 \(l^{(j)}_i\) somehow?
 
-It turns out, that ensuring supply to be equal to demand
-\(S=D\) leaves us with very little choice when it comes to prices anyway.
-Let us see what happens for a fixed price vector. We want \(S=D\). This
-obviously implies
+Since we are implicitly selecting the cutoff of who is going to produce \(j\) by
+setting \(p_j\) and we want to ensure supply to be equal to demand \(S=D\), it
+turns out we have very little choice when it comes to prices anyway. Let us see
+what happens for a fixed price vector. We want \(S=D\). This obviously implies
 \begin{equation}
 	\label{eq: supply gdp = demand gdp}
 	0 =\langle S-D,p\rangle =  \sum_{i=1}^n \langle S_i - D_i, p\rangle
@@ -131,6 +136,11 @@ If there are \(d\) products, that leaves a \(d-1\) hyperplane.
 
 But as we will see, there are some price vectors, which do ensure \(S=D\).
 We call these economic equilibria.
+
+\subsection{Money Supply and Price Stability}
+
+
+\subsection{The Individual Decision Problem}
 
 \begin{figure}
 	\centering
@@ -182,6 +192,7 @@ self-sufficiency. I.e. we get the following lemma.
 	\(y\) is also in the set on the right.
 \end{proof}
 
+\subsubsection{Income in Special Cases}
 
 \begin{lemma}[Income in the Pure Variable Cost Case]
 	In the pure variable cost case \(L_i(x) = \langle l_i, x\rangle\), income
@@ -247,8 +258,8 @@ of person \(i\) can be written as
 	specialization \(j\) is given by
 	\[
 		\bar{l}_i^{(j)}
-		:= l_i^{(j)}\Bigl[1+\frac{f_i^{(j)}}{L_i-f_i^{(j)}}\Bigr]
-		= l_i^{(j)}\Bigl[1+\frac{1}{L_i/f_i^{(j)}-1}\Bigr]
+		:= l_i^{(j)}\frac{L_i}{L_i-f_i^{(j)}}
+		= l_i^{(j)}\frac{1}{1-f_i^{(j)}/L_i}
 	\]
 \end{lemma}
 \begin{proof}
@@ -299,24 +310,23 @@ of person \(i\) can be written as
 	\[
 		\mu(p, X_i) \ge \max_{j=1,\dots,\dims} p_j x^{(j)}
 		= \max_{j=1,\dots,\dims}
-		p_j \frac{L_i - f_i^{(j)}}{l_i^{(j)}}.
+		p_j \frac{L_i - f_i^{(j)}}{l_i^{(j)}}
+		= L_i\max_{j=1,\dots,\dims}
+		\frac{p_j}{l_i^{(j)}\frac{L_i}{L_i - f_i^{(j)}}}.
 	\]
-	The average labour cost of specialization \(j\) is moreover given by
-	\[
+	Lastly the average labour cost of specialization \(j\) is given by
+	\begin{align*}
 		\bar{l}_i^{(j)}
-		= \frac{L_i}{x^{(j)}}
+		&= \frac{L_i}{x^{(j)}}
 		= \frac{l_i^{(j)} x^{(j)} + f_i^{(j)}}{x^{(j)}}
 		= l_i^{(j)} + \frac{f_i^{j}}{\left(\frac{L_i-f_i^{(j)}}{l_i^{(j)}}\right)}
-		= l_i^{(j)} \Bigl[1 + \frac{f_i^{j}}{L_i-f_i^{(j)}}\Bigr].
-	\]
-	In summary we have
-	\[
-		\mu(p, X_i)
-		= L_i \max_{j=1,\dots,\dims} p_j \frac{x^{(j)}}{L_i}
-		= L_i \max_{j=1,\dots,\dims} \frac{p_j}{\bar{l}_i^{(j)}}.
+		= l_i^{(j)} \Bigl[1 + \frac{f_i^{j}}{L_i-f_i^{(j)}}\Bigr]\\
+		&=l_i^{(j)}\frac{L_i}{L_i - f_i^{(j)}}.
 		\qedhere
-	\]
+	\end{align*}
 \end{proof}
+
+\subsubsection{The Individual Decision Problem in the Mixed Case}
 
 By talking about average costs \(\bar{l}_i^{(j)}\) in place of variable costs
 \(l_i^{(j)}\), we therefore salvaged the results from the pure variable
@@ -347,18 +357,73 @@ Where the ``willingness to pay'' (wtp) is simply the willingness to work
 Careful readers might have noticed, that
 this calculation is not quite accurate in the mixed case. Because the average costs
 depend on \(L_i\), which in turn makes \(\|w_i\|_\infty\) dependent on \(L_i\).
-What is interesting to note here, is that (hourly) wages increase with total
-labour time \(L_i\), as average cost decrease with \(L_i\). The size of this
-effect increases with the size of the fixed costs. If the fixed costs are close
-to \(L_i\) small decreases of \(L_i\) might make producing \(j\) completely
-unviable, but at the very least cut heavily into the little time left for
-actually producing \(j\). Or in other words average costs have singularities at
-\(f_i^{(j)}\)
+So by the product rule, the effort required would be
+\[
+		\frac{dL_i}{dy}
+		= \frac{d}{dy} \frac{\langle p, y\rangle}{\|w_i\|_\infty}
+		= \frac{p}{\|w_i\|_\infty}
+		- \frac{\langle p, y\rangle}{\|w_i\|_\infty^2}
+		\frac{d\|w_i\|_\infty}{dL_i}\frac{dL_i}{dy}
+\]
+Joining the \(\frac{dL_i}{dy}\) on both sides results in
+\[
+	\frac{dL_i}{dy}
+	= \frac{\frac{p}{\|w_i\|_\infty}}{
+		1 + \frac{\langle p, y\rangle}{\|w_i\|_\infty^2}
+		\frac{d\|w_i\|_\infty}{dL_i}
+	}
+	= \frac{p}{
+		\|w_i\|_\infty + \frac{\langle p, y\rangle}{\|w_i\|_\infty}
+		\frac{d\|w_i\|_\infty}{dL_i}
+	}.
+\]
+Where \(\|w_i\|_\infty=\max_{j} w_i^{(j)}\) is piecewise differentiable with derivatives
+\[
+	\frac{dw_i^{(j)}}{dL_i}
+	= \frac{d}{dL_i} \frac{p_j}{\bar{l}_i^{(j)}}
+	= \frac{p_j}{l_i^{(j)}} \frac{d}{dL_i} \frac{L_i-f_i^{(j)}}{L_i}
+	= \frac{p_j}{l_i^{(j)}} \frac{f_i^{(j)}}{L_i^2} > 0.
+\]
+In other words: Wages increase with total labour time \(L_i\), as
+average cost decrease with \(L_i\). The size of this effect increases with the
+size of the fixed costs. If the fixed costs are close to \(L_i\) small decreases
+of \(L_i\) might make producing \(j\) completely unviable, but at the very least
+cut heavily into the little time left for actually producing \(j\). In fact
+average costs have singularities at \(f_i^{(j)}\)
 \[
 	\lim_{L_i\downarrow f_i^{(j)}} \bar{l}_i^{(j)}
-	= \lim_{L_i\downarrow f_i^{(j)}}l_i^{(j)}\Bigl[1+\frac{1}{L_i/f_i^{(j)}-1}\Bigr]
-	= \infty
+	= \lim_{L_i\downarrow f_i^{(j)}}l_i^{(j)}\frac{1}{1-f_i^{(j)}/L_i}
+	= \infty.
 \]
+Using \(\bar{l}_i^{(j)}=l_i^{(j)}\frac{L_i}{L_i-f_i^{(j)}}\) we can alternatively
+write
+\[
+	\frac{dw_i^{(j)}}{dL_i}
+	= \frac{p_j}{\bar{l}_i^{(j)}} \frac{f_i^{(j)}(L_i-f_i^{(j)})}{L_i}
+	= w_i^{(j)} \frac{f_i^{(j)}(L_i-f_i^{(j)})}{L_i}.
+\]
+With \(j^* := \argmax_{j} w_i^{(j)}\) and \(L_i = \frac{\langle p,
+y\rangle}{\|w_i\|_\infty}\), this finally results in the effort required
+\[
+	\frac{dL_i}{dy}
+	= \frac{p}{
+		\|w_i\|_\infty + \langle p, y\rangle f_i^{(j^*)}
+		\bigl(1-\frac{f_i^{(j^*)}}{L_i}\bigr)
+	}
+	= \frac{p}{
+		\|w_i\|_\infty + f_i^{(j^*)}
+		\bigl(\langle p, y\rangle-f_i^{(j^*)}\|w_i\|_\infty\bigr)
+	}.
+\]
+The willingness to pay is therefore given by
+\[
+	\text{wtp} = \frac{u_y}{u_f}\Bigl[
+		\|w_i\|_\infty + f_i^{(j^*)}
+		\bigl(\langle p, y\rangle-f_i^{(j^*)}\|w_i\|_\infty\bigr)
+	\Bigr].
+\]
+
+\subsection{Prices in Societies of Clones}
 
 \begin{example*}[Pure Variable Cost case with Identical Production Capabilities]
 
