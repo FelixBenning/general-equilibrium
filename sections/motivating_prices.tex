@@ -250,6 +250,7 @@ self-sufficiency. I.e. we get the following lemma.
 \begin{lemma}[Trade is never harmful]
 \[
 	\underbrace{X_i(L_i)}_{\text{own production}}
+	\subseteq \quad \conv(X_i)\quad
 	\subseteq \quad
 	\underbrace{
 		\{y\in\real_{\ge 0}^\dims: \langle y, p\rangle \le \mu(p, X_i)\}
@@ -257,12 +258,17 @@ self-sufficiency. I.e. we get the following lemma.
 \]
 \end{lemma}
 \begin{proof}
-	Choose an arbitrary \(y\in X_i\), then by definition of \(\mu\)
+	Choose an arbitrary \(y\in \conv(X_i)\). Then there exist \(y_1,\dots, y_m\in X_i\)
+	such that \(y=\sum_{k=1}^m \lambda_k y_k\) for \(\lambda_k\in[0,1]\) with
+	\(\sum_{k=1}^{m}\lambda_k=1\). Then by definition of \(\mu\)
 	\[
-		\langle p, y\rangle \overset{y\in X_i}\le \sup\{\langle p, x\rangle : x\in
-		X_i\} \overset{\text{def.}}= \mu(p, X_i),
+		\langle p, y\rangle
+		= \sum_{k=1}^m \lambda_k\langle p, y_k\rangle
+		\overset{y_k\in X_i}\le \underbrace{\sum_{k=1}^m \lambda_k}_{=1}
+		\sup\{\langle p, x\rangle : x\in X_i\}
+		\overset{\text{def.}}= \mu(p, X_i).
 	\]
-	\(y\) is also in the set on the right.
+	So \(y\) is a consumption option with trade.
 \end{proof}
 
 \subsubsection{Income in the Pure Variable Cost Case}
