@@ -1,0 +1,133 @@
+\section{Shape of Supply \& Demand}
+\label{sec: shape supply/demand}
+
+First let us properly define supply and demand. The demand of individual \(i\)
+is given by
+\[
+	D_i(p) := \{
+		y : (L,y)
+		\text{ is a solution to \eqref{eq: individual decision problem}}
+	\}.
+\]
+Notice that it is a set, since there might be multiple solutions. The same is
+true for the supply of individual \(i\)
+\[
+	S_i(p) := \argmax_{x\in X_i} \langle p, x\rangle 
+	\overset{\text{Lem.~\ref{lem: subgradient of support functions}}}=
+	\partial_p \mu(p, X_i).
+\]
+We can then define total demand and supply
+\[
+	D(p) := \sum_{i=1}^n D_i(p),
+	\qquad
+	S(p) := \sum_{i=1}^n S_i(p),
+\]
+where the sums are Minkowski sums.
+And \(p^*\) is a market equilibrium, if
+\[
+	S(p^*)\cap D(p^*)\neq\emptyset.
+\]
+If \(S(p^*)\) and \(D(p^*)\) only contain a single element, one may write
+\(S(p^*)=D(p^*)\).
+
+\subsection{Shape of Supply}
+
+We are interested in the average supply
+\[
+	\tfrac1n S(p) = \frac1n \sum_{i=1}^n S_i(p)
+	= \frac1n\sum_{i=1}^n \partial_p\mu(p, X_i)
+	= \partial_p \tfrac1n \mu(p, X),
+\]
+where we have used the linearity of support functions with regards to Minkowski
+sums and linearity of the subgradient in the last equation. We are now going to
+delay taking the subgradient until later and consider the average income
+\[
+	\tfrac1n \mu(p,X)
+	= \frac1n \sum_{i=1}^n \mu(p, X_i)
+	= \frac1n \sum_{i=1}^n L_i \|w_i\|_\infty
+	\overset{\text{SLLN}}\to \E[L_1 \|w_1\|_\infty] \quad (n\to\infty).
+\]
+Where it is not unreasonable to assume that the work times and wages
+\(L_i\|w_i\|_\infty\) are iid random variables as we draw from a population of
+people.
+
+Unfortunately we now have lost all dependence on \(p\) which makes it impossible
+to take the derivative. To enable us to do this, we need some form of parametric
+model. So we turn to our fixed \& variable cost mixed case. Here we assume that
+the average time requirements \(\bar{l}_i= (\bar{l}_i^{(1)}, \dots,
+\bar{l}_i^{(\dims)})\) are iid random vectors. But as it will make notation
+later on easier, we are going to convert these average time requirements into
+(similarly independent) units per time
+\[
+	Q = (Q_1,\dots, Q_\dims)
+	= \Bigl(\frac1{\bar{l}_1^{(1)}}, \dots, \frac1{\bar{l}_1^{(\dims)}}\Bigr).
+\]
+Furthermore we are going to assume \(L_i=L_1\) is constant, which is not
+completely unreasonable given \(40\) hour work weeks\footnote{
+	We only really use this to move it out of the expectation so you could
+	alternatively assume independence to factorize the expectation. While this
+	is mathematically more general since constant random variables are trivially
+	independent from all others, it does not offer a real generalization. Because
+	we already argued that wages are increasing in \(L_i\). So if \(L_i\) was
+	not constant it certainly is not independent from \(\|w_i\|_\infty\).
+}.
+Finally we use the well known formula for the expectation of positive random
+variables\footnote{
+	Let \(X\) be an almost surely positive random variable, then
+	\[
+		\E[X]	= \int_0^\infty x d\Pr_X(x)
+		\overset{\text{Fub.}}= \int_0^\infty \int_0^\infty \ind_{t < x}d\Pr_X(x)dt
+		= \int_0^\infty 1- \Pr(X \le t)dt.
+	\]
+} to get
+\begin{align*}
+	\E[L_1\|w_1\|_\infty]
+	&= L_1 \E[\|w_1\|_\infty]
+	= L_1 \int_0^\infty 1 - \Pr(\|w_1\|_\infty \le x)dx\\
+	&= L_1 \int_0^\infty 1- \Pr\Bigl(\max_j \frac{p_j}{\bar{l}_1^{(j)}} \le x\Bigr)dx\\
+	&= L_1 \int_0^\infty 1- 
+	\underbrace{
+		\Pr\Bigl(Q_1 \le \frac{x}{p_1}, \dots, Q_\dims \le \frac{x}{p_\dims}\Bigr)
+	}_{=: F(\frac{x}{p_1},\dots,\frac{x}{p_\dims})}dx.
+\end{align*}
+Optimistically exchanging limits and differentiation and replacing our
+subgradient by a gradient, we get
+\begin{align*}
+	\tfrac1n S(p) &= \nabla_p \tfrac1n\mu(p, X)\\
+	&\to L_1 \int_0^\infty \nabla_p
+	\Bigl(1-F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\Bigr)dx\\
+	&=L_1 \begin{pmatrix}
+		\int_0^\infty 
+		\frac{\partial}{\partial x_1}
+		F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\frac{x}{p_1^2}dx
+		\\\vdots\\
+		\int_0^\infty 
+		\frac{\partial}{\partial x_\dims}
+		F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\frac{x}{p_\dims^2}dx
+	\end{pmatrix}\\
+	\overset{y=\frac{x}{p_j}}&=L_1 \begin{pmatrix}
+		\int_0^\infty 
+		\frac{\partial}{\partial x_1}
+		F\bigl(\tfrac{p_1}{p_1}y,\dots, \tfrac{p_1}{p_\dims}y\bigr)ydy
+		\\\vdots\\
+		\int_0^\infty 
+		\frac{\partial}{\partial x_\dims}
+		F\bigl(\tfrac{p_\dims}{p_1}y,\dots, \tfrac{p_\dims}{p_\dims}y\bigr)ydy
+	\end{pmatrix}.
+\end{align*}
+Let us now assume \(F\) to be absolutely continuous with density \(f\). Then
+\begin{align*}
+	\frac{\partial}{\partial x_\dims}F(x_1,\dots, x_\dims)
+	&= \int_0^{x_1} \dots \int_0^{x_{\dims-1}}
+	f(y_1,\dots, y_{\dims-1},x_\dims) dy_1\dots dy_{\dims-1}\\
+	&= \idotsint \prod_{j=1}^{\dims-1} \ind_{y_j\le x_j}
+	f(y_1,\dots, y_{\dims-1},x_\dims) dy_1\dots dy_{\dims-1}.
+\end{align*}
+So the supply for product \(\dims\) converges to
+\begin{align*}
+	&L_1\int_0^\infty
+	\frac{\partial}{\partial x_\dims}
+	F\bigl(\tfrac{p_\dims}{p_1}y_\dims,\dots,\tfrac{p_\dims}{p_{\dims-1}}y_\dims, y_\dims\bigr)y_\dims dy_\dims\\
+	&= L_1 \idotsint \prod_{j=1}^{\dims-1}y_\dims\ind_{y_j\le \frac{p_\dims}{p_j}y_\dims}
+	f(y_1,\dots,y_\dims)dy_1\dots dy_\dims
+\end{align*}
