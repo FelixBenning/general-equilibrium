@@ -36,13 +36,15 @@ We are interested in the average supply
 \[
 	\tfrac1n S(p) = \frac1n \sum_{i=1}^n S_i(p)
 	= \frac1n\sum_{i=1}^n \partial_p\mu(p, X_i)
-	= \partial_p \tfrac1n \mu(p, X),
+	= \partial_p \tfrac1n \mu(p, X)
+	= \partial_p \mu(p, \bar{X}_n),
 \]
 where we have used the linearity of support functions with regards to Minkowski
-sums and linearity of the subgradient in the last equation. We are now going to
-delay taking the subgradient until later and consider the average income
+sums and linearity of the subgradient in the last two equations. We are now
+going to delay taking the subgradient until later and consider the average
+income
 \[
-	\tfrac1n \mu(p,X)
+	\mu(p,\bar{X}_n)
 	= \frac1n \sum_{i=1}^n \mu(p, X_i)
 	= \frac1n \sum_{i=1}^n L_i \|w_i\|_\infty
 	\overset{\text{SLLN}}\to \E[L_1 \|w_1\|_\infty] \quad (n\to\infty).
@@ -90,11 +92,21 @@ variables\footnote{
 		\Pr\Bigl(Q_1 \le \frac{x}{p_1}, \dots, Q_\dims \le \frac{x}{p_\dims}\Bigr)
 	}_{=: F(\frac{x}{p_1},\dots,\frac{x}{p_\dims})}dx.
 \end{align*}
-Optimistically exchanging limits and differentiation and replacing our
-subgradient by a gradient, we get
+We therefore get
+\[
+	\mu(p, \bar{X}_n)
+	\to L_1\int_0^\infty 1- F\bigl(\tfrac{x}{p_1},\dots,\tfrac{x}{p_\dims}\bigr)dx
+	=: h(p)
+\]
+Since \(h\) retains all the properties of a support function as a limit of
+support functions, there exists some set \(X^\infty\) such that \(\mu(p,
+X^\infty)=h(p)\)\fxnote{does the set limit hold we defined earlier?}. In this
+sense we have \(\bar{X}_n\to X^\infty\). We now want to consider the limit
+supply
 \begin{align*}
-	\tfrac1n S(p) &= \nabla_p \tfrac1n\mu(p, X)\\
-	&\to L_1 \int_0^\infty \nabla_p
+	S^{\infty}(p)
+	&:= \partial_p \mu(p, X^\infty)\\
+	&= L_1 \int_0^\infty \nabla_p
 	\Bigl(1-F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\Bigr)dx\\
 	&=L_1 \begin{pmatrix}
 		\int_0^\infty 
@@ -113,9 +125,13 @@ subgradient by a gradient, we get
 		\int_0^\infty 
 		\frac{\partial}{\partial x_\dims}
 		F\bigl(\tfrac{p_\dims}{p_1}y,\dots, \tfrac{p_\dims}{p_\dims}y\bigr)ydy
-	\end{pmatrix}.
+	\end{pmatrix},
 \end{align*}
-Let us now assume \(F\) to be absolutely continuous with density \(f\). Then
+where we have somewhat optimistically swapped differentiation with integration
+and replaced the subgradient with an actual gradient assuming that \(F\) is
+differentiable and the subgradient thus unique. Let us now assume \(F\) to be
+absolutely continuous with density \(f\). Then keeping in mind that \(Q_k\) are
+positive
 \begin{align*}
 	\frac{\partial}{\partial x_\dims}F(x_1,\dots, x_\dims)
 	&= \int_0^{x_1} \dots \int_0^{x_{\dims-1}}
@@ -125,9 +141,38 @@ Let us now assume \(F\) to be absolutely continuous with density \(f\). Then
 \end{align*}
 So the supply for product \(\dims\) converges to
 \begin{align*}
-	&L_1\int_0^\infty
-	\frac{\partial}{\partial x_\dims}
-	F\bigl(\tfrac{p_\dims}{p_1}y_\dims,\dots,\tfrac{p_\dims}{p_{\dims-1}}y_\dims, y_\dims\bigr)y_\dims dy_\dims\\
-	&= L_1 \idotsint \prod_{j=1}^{\dims-1}y_\dims\ind_{y_j\le \frac{p_\dims}{p_j}y_\dims}
-	f(y_1,\dots,y_\dims)dy_1\dots dy_\dims
+	S_\dims^\infty(p) 
+	&=L_1\int_0^\infty
+	y_\dims
+	\frac{\partial}{\partial x_\dims} F\bigl(
+		\tfrac{p_\dims}{p_1}y_\dims,
+		\dots,
+		\tfrac{p_\dims}{p_{\dims-1}}y_\dims, y_\dims
+	\bigr) dy_\dims\\
+	&= L_1 \idotsint y_\dims\prod_{j=1}^{\dims-1}\ind_{y_j\le \frac{p_\dims}{p_j}y_\dims}
+	f(y_1,\dots,y_\dims)dy_1\dots dy_\dims\\
+	&= L_1 \E\Bigl[
+		Q_\dims \prod_{j=1}^{\dims-1}\ind_{p_jQ_j\le p_\dims Q_\dims}
+	\Bigr].
 \end{align*}
+Similarly we get for all other products
+\[
+	S_k^\infty(p)
+	= L_1 \E\Bigl[
+		Q_k \prod_{\substack{j\le\dims\\j\neq k}}\ind_{p_jQ_j\le p_k Q_k}
+	\Bigr].
+\]
+It is quite obvious that the supply of unit \(k\), \(S^\infty_k(p)\), is
+monotonously increasing in \(p_k\).  If we further assume \(\E[Q_k]<\infty\), we
+get by dominated convergence
+\[
+	\lim_{p_k\to \infty}S_k^\infty(p) = L_1\E[Q_k]
+	\qquad\text{and}\qquad
+	\lim_{p_k\to 0}S_k^\infty(p) = 0.
+\]
+If you recall that \(Q_k\) denotes the units of \(k\) per time a random
+person can produce, this makes perfect sense. If the price increases to infinity
+all efforts would go towards producing good \(k\). So we multiply the labour
+time by the average number of units of \(k\) a person produces to obtain the
+average supply. Similarly nobody will produce good \(k\) if the price goes to
+zero.
