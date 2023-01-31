@@ -104,7 +104,7 @@ X^\infty)=h(p)\)\fxnote{does the set limit hold we defined earlier?}. In this
 sense we have \(\bar{X}_n\to X^\infty\). We now want to consider the limit
 supply
 \begin{align*}
-	S^{\infty}(p)
+	S_\infty(p)
 	&:= \partial_p \mu(p, X^\infty)\\
 	&= L_1 \int_0^\infty \nabla_p
 	\Bigl(1-F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\Bigr)dx\\
@@ -141,7 +141,7 @@ positive
 \end{align*}
 So the supply for product \(\dims\) converges to
 \begin{align*}
-	S_\dims^\infty(p) 
+	S_\infty^{(\dims)}(p) 
 	&=L_1\int_0^\infty
 	y_\dims
 	\frac{\partial}{\partial x_\dims} F\bigl(
@@ -157,7 +157,7 @@ So the supply for product \(\dims\) converges to
 \end{align*}
 Similarly we get for all other products
 \[
-	S_k^\infty(p)
+	S_\infty^{(k)}(p)
 	= L_1 \E\Bigl[
 		Q_k \prod_{\substack{j\le\dims\\j\neq k}}\ind_{p_jQ_j\le p_k Q_k}
 	\Bigr].
@@ -166,9 +166,9 @@ It is quite obvious that the supply of unit \(k\), \(S^\infty_k(p)\), is
 monotonously increasing in \(p_k\).  If we further assume \(\E[Q_k]<\infty\), we
 get by dominated convergence
 \[
-	\lim_{p_k\to \infty}S_k^\infty(p) = L_1\E[Q_k]
+	\lim_{p_k\to \infty}S_\infty^{(k)}(p) = L_1\E[Q_k]
 	\qquad\text{and}\qquad
-	\lim_{p_k\to 0}S_k^\infty(p) = 0.
+	\lim_{p_k\to 0}S_\infty^{(k)}(p) = 0.
 \]
 If you recall that \(Q_k\) denotes the units of \(k\) per time a random
 person can produce, this makes perfect sense. If the price increases to infinity
@@ -215,7 +215,8 @@ The average demand for product \(j\) is then given by
 		\ind_{Z_i^{(j)}\le l_i^{(j)}}
 	)\\
 	&\to\begin{aligned}[t]
-		&= 1- \Pr(
+		D_\infty^{(j)}(p)
+		&:= 1- \Pr(
 			\wtb_1^{(j)} \le p_j,\;
 			Z_1^{(j)}\le l_1^{(j)}
 		)\\
@@ -254,15 +255,45 @@ these back together.
 \subsubsection{Fixed Budget Model}
 
 In this section we want to model infinitely divisible products. For this we will
-assume that every person \(i\) has a fixed work time budget \(T_i^{(j)}\) for
-every good \(j\) and uses it up completely no matter the price. The money budget
-is then given by \(B_i^{(j)} = T_i^{(j)}\|w_i\|_\infty\). The amount of \(j\)
-consumed by \(i\) is then given by
-\begin{equation}
+assume that every person \(i\) has a fixed work time budget \(L_i^{(j)}\) for
+every good \(j\) and uses it up completely no matter the price. The total
+work time is therefore \(L_i = \sum_{j=1}^\dims L_i^{(j)}\).
+The money budget is then given by \(B_i^{(j)} = L_i^{(j)}\|w_i\|_\infty\). The
+amount of \(j\) consumed by \(i\) is then given by
+\begin{align}
 	\label{eq: fixed budget and consumption relation}
-	D_i^{(j)}(p) = \frac{B_i^{(j)}}{p_j} = \frac{\|w_i\|_\infty}{p_j}T_i^{(j)}.
-\end{equation}
-with \(L_i = \sum_{j=1}^\dims T_i^{(j)}\).
+	D_i^{(j)}(p)
+	&= \frac{B_i^{(j)}}{p_j} = \frac{\|w_i\|_\infty}{p_j}L_i^{(j)}\\
+	\label{eq: monotonously decreasing in pj}
+	&= \max\Bigl\{
+		\frac{\|w_i^{(-j)}\|_\infty}{p_j},\;
+		\frac1{l_i^{(j)}}
+	\Bigr\}L_i^{(j)}\\
+	\nonumber
+	&= \frac{\|w_i^{(-j)}\|_\infty}{p_j}L_i^{(j)}
+	\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} \ge p_j}
+	+ \frac{L_i^{(j)}}{l_i^{(j)}}
+	\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} < p_j}.
+\end{align}
+As a sum of monotonously decreasing function (cf.~\eqref{eq: monotonously
+decreasing in pj}) the average demand is also monotonously decreasing in \(p_j\)
+and given by
+\begin{align*}
+	\tfrac1n D^{(j)}(p)
+	&= \frac1n \sum_{i=1}^n D_i^{(j)}(p)\\
+	&\to\begin{aligned}[t]
+		&D_\infty^{(j)}(p)\\
+		&:= \frac{\E\Bigl[
+			L_i^{(j)}\|w_i^{(-j)}\|_\infty 
+			\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} \ge p_j}
+		\Bigr]}{p_j}
+		+ \E\Bigl[
+			\frac{L_i^{(j)}}{l_i^{(j)}}
+			\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} < p_j}
+		\Bigr].
+	\end{aligned}
+\end{align*}
+
 
 \begin{lemma}[Cobb-Douglas Utility]
 	We consider the logarithmic version of the Cobb-Douglas utility\footnote{
@@ -285,12 +316,12 @@ with \(L_i = \sum_{j=1}^\dims T_i^{(j)}\).
 	Even without this assumption on the derivative of wages we obtain
 	the first equation
 	\[
-		T_i^{(j)}
+		L_i^{(j)}
 		= L_i\frac{\lambda_j}{\sum_{k=1}^\dims\lambda_k}
 		\overset{\eqref{eq: work time under Cobb-Douglas}}=
 		\frac{\lambda_j}{\sum_{k=0}^\dims\lambda_k},
 	\]
-	resulting in  \(L_i = \sum_{j=1}^\dims T_i^{(j)}\). The second equation,
+	resulting in  \(L_i = \sum_{j=1}^\dims L_i^{(j)}\). The second equation,
 	which requires \(\frac{d}{dL_i}\|w_i\|_\infty=0\), implies the work time
 	budget is fixed and independent of prices. If \(L_i\) is fixed and can
 	not be decided over by the agent \(i\) (e.g. 40 hour work week), then
@@ -328,7 +359,7 @@ with \(L_i = \sum_{j=1}^\dims T_i^{(j)}\).
 	\[
 		y^{(j)}
 		= \frac{\|w_i\|_\infty}{p_j}
-		\underbrace{L_i\frac{\lambda_j}{\sum_{j=1}^\dims \lambda_j}}_{=T_i^{(j)}}.
+		\underbrace{L_i\frac{\lambda_j}{\sum_{j=1}^\dims \lambda_j}}_{=L_i^{(j)}}.
 	\]
 	Now we uses this result to define the remaining utility function in \(L_i\) 
 	to be optimized
@@ -356,3 +387,5 @@ with \(L_i = \sum_{j=1}^\dims T_i^{(j)}\).
 		\qedhere
 	\]
 \end{proof}
+
+
