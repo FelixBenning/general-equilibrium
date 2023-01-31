@@ -283,14 +283,16 @@ and given by
 	&= \frac1n \sum_{i=1}^n D_i^{(j)}(p)\\
 	&\to\begin{aligned}[t]
 		&D_\infty^{(j)}(p)\\
-		&:= \frac{\E\Bigl[
+		&:= \underbrace{\frac{\E\Bigl[
 			L_i^{(j)}\|w_i^{(-j)}\|_\infty 
-			\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} \ge p_j}
-		\Bigr]}{p_j}
-		+ \E\Bigl[
+			\ind_{\|w_i^{(-j)}\|_\infty \ge \frac{p_j}{l_i^{(j)}}}
+		\Bigr]}{p_j}}_{
+			\text{buyers}
+		}
+		+ \underbrace{\E\Bigl[
 			\frac{L_i^{(j)}}{l_i^{(j)}}
-			\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} < p_j}
-		\Bigr].
+			\ind_{\|w_i^{(-j)}\|_\infty  < \frac{p_j}{l_i^{(j)}}}
+		\Bigr]}_{\text{DIY'ers}}.
 	\end{aligned}
 \end{align*}
 
