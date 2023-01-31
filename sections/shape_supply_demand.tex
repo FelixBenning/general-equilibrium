@@ -250,3 +250,106 @@ the average demand in \(p_j\) is approximately equal to
 \(\bar{F}_{\wtb_1^{(j)}}\). But while \(\wtb_1^{(j)}\) does not include \(p_j\)
 it does include the remaining entries of \(p\), so it is not trivial to put
 these back together.
+
+\subsubsection{Fixed Budget Model}
+
+In this section we want to model infinitely divisible products. For this we will
+assume that every person \(i\) has a fixed work time budget \(T_i^{(j)}\) for
+every good \(j\) and uses it up completely no matter the price. The money budget
+is then given by \(B_i^{(j)} = T_i^{(j)}\|w_i\|_\infty\). The amount of \(j\)
+consumed by \(i\) is then given by
+\begin{equation}
+	\label{eq: fixed budget and consumption relation}
+	D_i^{(j)}(p) = \frac{B_i^{(j)}}{p_j} = \frac{\|w_i\|_\infty}{p_j}T_i^{(j)}.
+\end{equation}
+with \(L_i = \sum_{j=1}^\dims T_i^{(j)}\).
+
+\begin{lemma}[Cobb-Douglas Utility]
+	We consider the logarithmic version of the Cobb-Douglas utility\footnote{
+		The two variants are interchangeable in the utility optimization problem
+		as the maximization problem does not change under monotonous transforms.
+		But the logarithmic form actually has decreasing marginal utility. This is
+		more realistic than the standard form should we introduce expected utility
+		as it causes risk aversion.
+	}
+	\[
+		u(f,x) = \lambda_0 \ln(f) + \sum_{j=1}^\dims \lambda_j \ln(x^{(j)})
+	\]
+	where \(f\) denotes free-time and we normalize time to \(1=f+L_i\). We
+	further assume	 \(\frac{d}{dL_i}\|w_i\|_\infty=0\) (e.g. the variable cost
+	case). Then work time is independent of prices
+	\begin{equation}\label{eq: work time under Cobb-Douglas}
+		L_i = 1- \underbrace{\frac{\lambda_0}{\sum_{j=0}^\dims \lambda_j}}_{=f}
+		= \frac{\sum_{j=1}^\dims \lambda_j}{\sum_{j=0}^\dims \lambda_j}.
+	\end{equation}
+	Even without this assumption on the derivative of wages we obtain
+	the first equation
+	\[
+		T_i^{(j)}
+		= L_i\frac{\lambda_j}{\sum_{k=1}^\dims\lambda_k}
+		\overset{\eqref{eq: work time under Cobb-Douglas}}=
+		\frac{\lambda_j}{\sum_{k=0}^\dims\lambda_k},
+	\]
+	resulting in  \(L_i = \sum_{j=1}^\dims T_i^{(j)}\). The second equation,
+	which requires independence of wages and work time implies the work time
+	budget is fixed and independent of prices.
+\end{lemma}
+\begin{proof}
+	Let us first optimize over \(y\) for a fixed \(L_i\) in the individual
+	optimization problem
+	\[
+		\max_{L_i, y} u(1-L_i, y)
+		\quad \text{s.t.}\quad
+		\langle p, y\rangle \le \mu(p, X_i(L_i)) = L_i \|w_i\|_\infty,
+	\]
+	and later optimize over \(L_i\). Taking the derivative of the Lagrange
+	function
+	\[
+		\mathcal{L}	(y, \gamma)
+		= u(1-L_i, y) - \gamma [\langle p, y\rangle - L_i\|w_i\|_\infty]
+	\]
+	results in
+	\[
+		0\overset!= \frac{d}{d y^{(j)}}u(1-L_i,y) - \gamma p_j
+		= \frac{\lambda_j}{y^{(j)}} - \gamma p_j
+	\]
+	which leads to \(y^{(j)} = \frac{\lambda_j}{\gamma p_j}\). Taking the
+	derivative with regards to the Lagrange multiplier \(\gamma\) leads to
+	\[
+		L_i\|w_i\|_\infty = \langle p, y\rangle
+		= \sum_{j=1}^\dims p_j \frac{\lambda_j}{\gamma p_j}
+		= \frac{\sum_{j=1}^\dims \lambda_j}\gamma
+	\]
+	and thus \(\gamma = \frac{\sum_{j=1}^\dims \lambda_j}{L_i\|w_i\|_\infty}\).
+	This implies with \eqref{eq: fixed budget and consumption relation}
+	\[
+		y^{(j)}
+		= \frac{\|w_i\|_\infty}{p_j}
+		\underbrace{L_i\frac{\lambda_j}{\sum_{j=1}^\dims \lambda_j}}_{=T_i^{(j)}}.
+	\]
+	Now we uses this result to define the remaining utility function in \(L_i\) 
+	to be optimized
+	\[
+		u(L_i) = \lambda_0 \ln(1-L_i) + \sum_{j=1}^\dims \lambda_j \left[
+			\ln(\|w_i\|_\infty) + \ln(L_i) + \ln\Bigl(\frac{\lambda_j}{p_j\sum_{j=1}^\dims \lambda_j}\Bigr)
+		\right]
+	\]
+	Finally we take the derivative with regards to \(L_i\) to get
+	\[
+		0\overset!= -\frac{\lambda_0}{1-L_i}
+		+ \left[
+			\frac{\frac{d}{dL_i}\|w_i\|_\infty}{\|w_i\|_\infty}
+			+ \frac1{L_i}
+		\right]\sum_{j=1}^\dims \lambda_j.
+	\]
+	Using \(\frac{d}{dL_i}\|w_i\|_\infty = 0\) 
+	and multiplying the entire equation by \(L_i(1-L_i)\) we get
+	\[
+		0\overset!= -\lambda_0L_i + (1-L_i)\sum_{j=1}^\dims \lambda_j.
+	\]
+	This immediately leads to our final claim
+	\[
+		L_i = \frac{\sum_{j=1}^\dims \lambda_j}{\sum_{j=0}^\dims \lambda_j}.
+		\qedhere
+	\]
+\end{proof}
