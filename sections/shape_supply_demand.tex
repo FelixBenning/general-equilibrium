@@ -1,0 +1,396 @@
+\section{Shape of Supply \& Demand}
+\label{sec: shape supply/demand}
+
+First let us properly define supply and demand. The demand of individual \(i\)
+is given by
+\[
+	D_i(p) := \{
+		y : (L,y)
+		\text{ is a solution to \eqref{eq: individual decision problem}}
+	\}.
+\]
+Notice that it is a set, since there might be multiple solutions. The same is
+true for the supply of individual \(i\)
+\[
+	S_i(p) := \argmax_{x\in X_i} \langle p, x\rangle 
+	\overset{\text{Lem.~\ref{lem: subgradient of support functions}}}=
+	\partial_p \mu(p, X_i).
+\]
+We can then define total demand and supply
+\[
+	D(p) := \sum_{i=1}^n D_i(p),
+	\qquad
+	S(p) := \sum_{i=1}^n S_i(p),
+\]
+where the sums are Minkowski sums.
+And \(p^*\) is a market equilibrium, if
+\[
+	S(p^*)\cap D(p^*)\neq\emptyset.
+\]
+If \(S(p^*)\) and \(D(p^*)\) only contain a single element, one may write
+\(S(p^*)=D(p^*)\).
+
+\subsection{Shape of Supply}
+
+We are interested in the average supply
+\[
+	\tfrac1n S(p) = \frac1n \sum_{i=1}^n S_i(p)
+	= \frac1n\sum_{i=1}^n \partial_p\mu(p, X_i)
+	= \partial_p \tfrac1n \mu(p, X)
+	= \partial_p \mu(p, \bar{X}_n),
+\]
+where we have used the linearity of support functions with regards to Minkowski
+sums and linearity of the subgradient in the last two equations. We are now
+going to delay taking the subgradient until later and consider the average
+income
+\[
+	\mu(p,\bar{X}_n)
+	= \frac1n \sum_{i=1}^n \mu(p, X_i)
+	= \frac1n \sum_{i=1}^n L_i \|w_i\|_\infty
+	\overset{\text{SLLN}}\to \E[L_1 \|w_1\|_\infty] \quad (n\to\infty).
+\]
+Where it is not unreasonable to assume that the work times and wages
+\(L_i\|w_i\|_\infty\) are iid random variables as we draw from a population of
+people.
+
+Unfortunately we now have lost all dependence on \(p\) which makes it impossible
+to take the derivative. To enable us to do this, we need some form of parametric
+model. So we turn to our fixed \& variable cost mixed case. Here we assume that
+the average time requirements \(\bar{l}_i= (\bar{l}_i^{(1)}, \dots,
+\bar{l}_i^{(\dims)})\) are iid random vectors. But as it will make notation
+later on easier, we are going to convert these average time requirements into
+(similarly independent) units per time
+\[
+	Q = (Q_1,\dots, Q_\dims)
+	= \Bigl(\frac1{\bar{l}_1^{(1)}}, \dots, \frac1{\bar{l}_1^{(\dims)}}\Bigr).
+\]
+Furthermore we are going to assume \(L_i=L_1\) is constant, which is not
+completely unreasonable given \(40\) hour work weeks\footnote{
+	We only really use this to move it out of the expectation so you could
+	alternatively assume independence to factorize the expectation. While this
+	is mathematically more general since constant random variables are trivially
+	independent from all others, it does not offer a real generalization. Because
+	we already argued that wages are increasing in \(L_i\). So if \(L_i\) was
+	not constant it certainly is not independent from \(\|w_i\|_\infty\).
+}.
+Finally we use the well known formula for the expectation of positive random
+variables\footnote{
+	Let \(X\) be an almost surely positive random variable, then
+	\[
+		\E[X]	= \int_0^\infty x d\Pr_X(x)
+		\overset{\text{Fub.}}= \int_0^\infty \int_0^\infty \ind_{t < x}d\Pr_X(x)dt
+		= \int_0^\infty 1- \Pr(X \le t)dt.
+	\]
+} to get
+\begin{align*}
+	\E[L_1\|w_1\|_\infty]
+	&= L_1 \E[\|w_1\|_\infty]
+	= L_1 \int_0^\infty 1 - \Pr(\|w_1\|_\infty \le x)dx\\
+	&= L_1 \int_0^\infty 1- \Pr\Bigl(\max_j \frac{p_j}{\bar{l}_1^{(j)}} \le x\Bigr)dx\\
+	&= L_1 \int_0^\infty 1- 
+	\underbrace{
+		\Pr\Bigl(Q_1 \le \frac{x}{p_1}, \dots, Q_\dims \le \frac{x}{p_\dims}\Bigr)
+	}_{=: F(\frac{x}{p_1},\dots,\frac{x}{p_\dims})}dx.
+\end{align*}
+We therefore get
+\[
+	\mu(p, \bar{X}_n)
+	\to L_1\int_0^\infty 1- F\bigl(\tfrac{x}{p_1},\dots,\tfrac{x}{p_\dims}\bigr)dx
+	=: h(p)
+\]
+Since \(h\) retains all the properties of a support function as a limit of
+support functions, there exists some set \(X^\infty\) such that \(\mu(p,
+X^\infty)=h(p)\)\fxnote{does the set limit hold we defined earlier?}. In this
+sense we have \(\bar{X}_n\to X^\infty\). We now want to consider the limit
+supply
+\begin{align*}
+	S_\infty(p)
+	&:= \partial_p \mu(p, X^\infty)\\
+	&= L_1 \int_0^\infty \nabla_p
+	\Bigl(1-F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\Bigr)dx\\
+	&=L_1 \begin{pmatrix}
+		\int_0^\infty 
+		\frac{\partial}{\partial x_1}
+		F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\frac{x}{p_1^2}dx
+		\\\vdots\\
+		\int_0^\infty 
+		\frac{\partial}{\partial x_\dims}
+		F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\frac{x}{p_\dims^2}dx
+	\end{pmatrix}\\
+	\overset{y=\frac{x}{p_j}}&=L_1 \begin{pmatrix}
+		\int_0^\infty 
+		\frac{\partial}{\partial x_1}
+		F\bigl(\tfrac{p_1}{p_1}y,\dots, \tfrac{p_1}{p_\dims}y\bigr)ydy
+		\\\vdots\\
+		\int_0^\infty 
+		\frac{\partial}{\partial x_\dims}
+		F\bigl(\tfrac{p_\dims}{p_1}y,\dots, \tfrac{p_\dims}{p_\dims}y\bigr)ydy
+	\end{pmatrix},
+\end{align*}
+where we have somewhat optimistically swapped differentiation with integration
+and replaced the subgradient with an actual gradient assuming that \(F\) is
+differentiable and the subgradient thus unique. Let us now assume \(F\) to be
+absolutely continuous with density \(f\). Then keeping in mind that \(Q_k\) are
+positive
+\begin{align*}
+	\frac{\partial}{\partial x_\dims}F(x_1,\dots, x_\dims)
+	&= \int_0^{x_1} \dots \int_0^{x_{\dims-1}}
+	f(y_1,\dots, y_{\dims-1},x_\dims) dy_1\dots dy_{\dims-1}\\
+	&= \idotsint \prod_{j=1}^{\dims-1} \ind_{y_j\le x_j}
+	f(y_1,\dots, y_{\dims-1},x_\dims) dy_1\dots dy_{\dims-1}.
+\end{align*}
+So the supply for product \(\dims\) converges to
+\begin{align*}
+	S_\infty^{(\dims)}(p) 
+	&=L_1\int_0^\infty
+	y_\dims
+	\frac{\partial}{\partial x_\dims} F\bigl(
+		\tfrac{p_\dims}{p_1}y_\dims,
+		\dots,
+		\tfrac{p_\dims}{p_{\dims-1}}y_\dims, y_\dims
+	\bigr) dy_\dims\\
+	&= L_1 \idotsint y_\dims\prod_{j=1}^{\dims-1}\ind_{y_j\le \frac{p_\dims}{p_j}y_\dims}
+	f(y_1,\dots,y_\dims)dy_1\dots dy_\dims\\
+	&= L_1 \E\Bigl[
+		Q_\dims \prod_{j=1}^{\dims-1}\ind_{p_jQ_j\le p_\dims Q_\dims}
+	\Bigr].
+\end{align*}
+Similarly we get for all other products
+\[
+	S_\infty^{(k)}(p)
+	= L_1 \E\Bigl[
+		Q_k \prod_{\substack{j\le\dims\\j\neq k}}\ind_{p_jQ_j\le p_k Q_k}
+	\Bigr].
+\]
+It is quite obvious that the supply of unit \(k\), \(S^\infty_k(p)\), is
+monotonously increasing in \(p_k\).  If we further assume \(\E[Q_k]<\infty\), we
+get by dominated convergence
+\[
+	\lim_{p_k\to \infty}S_\infty^{(k)}(p) = L_1\E[Q_k]
+	\qquad\text{and}\qquad
+	\lim_{p_k\to 0}S_\infty^{(k)}(p) = 0.
+\]
+If you recall that \(Q_k\) denotes the units of \(k\) per time a random
+person can produce, this makes perfect sense. If the price increases to infinity
+all efforts would go towards producing good \(k\). So we multiply the labour
+time by the average number of units of \(k\) a person produces to obtain the
+average supply. Similarly nobody will produce good \(k\) if the price goes to
+zero.
+
+\subsection{Shape of Demand}
+
+\subsubsection{One or None Model}
+
+Let us consider discrete products of which people might want to buy a single
+item or none.
+
+Let the willingness to work of person \(i\) for product \(j\) be given by
+\(Z_i^{(j)}\). Taking the simpler willingness to pay from the pure variable case
+we get
+\[
+	\wtp_i^{(j)}
+	= Z_i^{(j)}\|w_i\|_\infty
+	=\max\{ \underbrace{Z_i^{(j)}\|w_i^{(-j)}\|_\infty}_{=:\text{wtb}_i^{(j)}},  Z_i^{(j)}w_i^{(j)}\},
+\]
+where we remove \(w_i^{(j)}\) from \(w_i\) to obtain
+\[
+	w_i^{(-j)} := (w_i^{(1)}, \dots, \widehat{w_i^{(j)}}, \dots, w_i^{(\dims)}),
+\]
+and defined the ``willingness to buy'' \(\text{wtb}_i^{(j)}\).
+The demand of person \(i\) for product \(j\) is therefore given by
+\[\begin{aligned}
+	D_i^{(j)}(p)
+	&= \ind_{\wtp_i^{(j)} > p_j}
+	= \ind_{\wtb_i^{(j)} > p_j \text{ or } Z_i^{(j)}w_i^{(j)} > p_j}\\
+	&= 1- \ind_{\wtb_i^{(j)} \le p_j}\ind_{Z_i^{(j)}w_i^{(j)} \le p_j}\\
+	\overset{w_i^{(j)}= \frac{p_j}{l_i^{(j)}}}&=
+	1- \ind_{\wtb_i^{(j)} \le p_j}
+	\ind_{Z_i^{(j)}\le l_i^{(j)}}.
+\end{aligned}\]
+The average demand for product \(j\) is then given by
+\begin{align*}
+	\tfrac1n D^{(j)}(p)
+	&= \frac1n\sum_{i=1}^n(
+		1- \ind_{\wtb_i^{(j)}\le p_j}
+		\ind_{Z_i^{(j)}\le l_i^{(j)}}
+	)\\
+	&\to\begin{aligned}[t]
+		D_\infty^{(j)}(p)
+		&:= 1- \Pr(
+			\wtb_1^{(j)} \le p_j,\;
+			Z_1^{(j)}\le l_1^{(j)}
+		)\\
+		&=\underbrace{1- \Pr(\wtb_1^{(j)} \le p_j)}_{
+			\begin{aligned}[t]
+				&=1-F_{\wtb_1^{(j)}}(p_j)\\
+				&=\bar{F}_{\wtb_1^{(j)}}(p_j)
+			\end{aligned}
+		} +\underbrace{
+			\Pr(\wtb_1^{(j)} \le p_j,\; Z_1^{(j)} > l_1^{(j)})
+		}_{
+			\text{too expensive, but willing to DIY}
+		}.
+	\end{aligned}
+\end{align*}
+Here \(F_{\wtb_1^{(j)}}\) denotes the cumulative distribution function of the
+willingness to buy for product \(j\). The Glivenko-Cantelli theorem can be
+adapted to this case to prove the convergence is uniform in \(p_j\), since it
+only uses monotonicity.
+
+If the probability that people are willing to do it themselves (DIY) is small,
+which is likely for a large number of products, then due to
+\[
+	0
+	\le \underbrace{\Pr(\wtb_1^{(j)} \le p_j,\; Z_1^{(j)} > l_1^{(j)})}_{
+		0\; \xleftarrow{p_j\downarrow 0}
+		\qquad \xrightarrow{p_j\uparrow\infty}\; \mathrlap{\Pr(Z_1^{(j)} > l_1^{(j)})}
+	}
+	\le \Pr(Z_1^{(j)} > l_1^{(j)}) = \Pr(\text{willing to DIY}),
+\]
+the average demand in \(p_j\) is approximately equal to
+\(\bar{F}_{\wtb_1^{(j)}}\). But while \(\wtb_1^{(j)}\) does not include \(p_j\)
+it does include the remaining entries of \(p\), so it is not trivial to put
+these back together.
+
+\subsubsection{Fixed Budget Model}
+
+In this section we want to model infinitely divisible products. For this we will
+assume that every person \(i\) has a fixed work time budget \(L_i^{(j)}\) for
+every good \(j\) and uses it up completely no matter the price. The total
+work time is therefore \(L_i = \sum_{j=1}^\dims L_i^{(j)}\).
+The money budget is then given by \(B_i^{(j)} = L_i^{(j)}\|w_i\|_\infty\). The
+amount of \(j\) consumed by \(i\) is then given by
+\begin{align}
+	\label{eq: fixed budget and consumption relation}
+	D_i^{(j)}(p)
+	&= \frac{B_i^{(j)}}{p_j} = \frac{\|w_i\|_\infty}{p_j}L_i^{(j)}\\
+	\label{eq: monotonously decreasing in pj}
+	&= \max\Bigl\{
+		\frac{\|w_i^{(-j)}\|_\infty}{p_j},\;
+		\frac1{l_i^{(j)}}
+	\Bigr\}L_i^{(j)}\\
+	\nonumber
+	&= \frac{\|w_i^{(-j)}\|_\infty}{p_j}L_i^{(j)}
+	\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} \ge p_j}
+	+ \frac{L_i^{(j)}}{l_i^{(j)}}
+	\ind_{\|w_i^{(-j)}\|_\infty l_i^{(j)} < p_j}.
+\end{align}
+As a sum of monotonously decreasing function (cf.~\eqref{eq: monotonously
+decreasing in pj}) the average demand is also monotonously decreasing in \(p_j\)
+and given by
+\begin{align*}
+	\tfrac1n D^{(j)}(p)
+	&= \frac1n \sum_{i=1}^n D_i^{(j)}(p)\\
+	&\to\begin{aligned}[t]
+		&D_\infty^{(j)}(p)\\
+		&:= \underbrace{\frac{\E\Bigl[
+			L_i^{(j)}\|w_i^{(-j)}\|_\infty 
+			\ind_{\|w_i^{(-j)}\|_\infty \ge \frac{p_j}{l_i^{(j)}}}
+		\Bigr]}{p_j}}_{
+			\text{buyers}
+		}
+		+ \underbrace{\E\Bigl[
+			\frac{L_i^{(j)}}{l_i^{(j)}}
+			\ind_{\|w_i^{(-j)}\|_\infty  < \frac{p_j}{l_i^{(j)}}}
+		\Bigr]}_{\text{DIY'ers}}.
+	\end{aligned}
+\end{align*}
+
+
+\begin{lemma}[Cobb-Douglas Utility]
+	We consider the logarithmic version of the Cobb-Douglas utility\footnote{
+		The two variants are interchangeable in the utility optimization problem
+		as the maximization problem does not change under monotonous transforms.
+		But the logarithmic form actually has decreasing marginal utility. This is
+		more realistic than the standard form should we introduce expected utility
+		as it causes risk aversion.
+	}
+	\[
+		u(f,x) = \lambda_0 \ln(f) + \sum_{j=1}^\dims \lambda_j \ln(x^{(j)})
+	\]
+	where \(f\) denotes free-time and we normalize time to \(1=f+L_i\). We
+	further assume	 \(\frac{d}{dL_i}\|w_i\|_\infty=0\) (e.g. the variable cost
+	case). Then work time is independent of prices
+	\begin{equation}\label{eq: work time under Cobb-Douglas}
+		L_i = 1- \underbrace{\frac{\lambda_0}{\sum_{j=0}^\dims \lambda_j}}_{=f}
+		= \frac{\sum_{j=1}^\dims \lambda_j}{\sum_{j=0}^\dims \lambda_j}.
+	\end{equation}
+	Even without this assumption on the derivative of wages we obtain
+	the first equation
+	\[
+		L_i^{(j)}
+		= L_i\frac{\lambda_j}{\sum_{k=1}^\dims\lambda_k}
+		\overset{\eqref{eq: work time under Cobb-Douglas}}=
+		\frac{\lambda_j}{\sum_{k=0}^\dims\lambda_k},
+	\]
+	resulting in  \(L_i = \sum_{j=1}^\dims L_i^{(j)}\). The second equation,
+	which requires \(\frac{d}{dL_i}\|w_i\|_\infty=0\), implies the work time
+	budget is fixed and independent of prices. If \(L_i\) is fixed and can
+	not be decided over by the agent \(i\) (e.g. 40 hour work week), then
+	the second equation does not hold, but we still have a fixed work time
+	budget by the first equation.
+\end{lemma}
+\begin{proof}
+	Let us first optimize over \(y\) for a fixed \(L_i\) in the individual
+	optimization problem
+	\[
+		\max_{L_i, y} u(1-L_i, y)
+		\quad \text{s.t.}\quad
+		\langle p, y\rangle \le \mu(p, X_i(L_i)) = L_i \|w_i\|_\infty,
+	\]
+	and later optimize over \(L_i\). Taking the derivative of the Lagrange
+	function
+	\[
+		\mathcal{L}	(y, \gamma)
+		= u(1-L_i, y) - \gamma [\langle p, y\rangle - L_i\|w_i\|_\infty]
+	\]
+	results in
+	\[
+		0\overset!= \frac{d}{d y^{(j)}}u(1-L_i,y) - \gamma p_j
+		= \frac{\lambda_j}{y^{(j)}} - \gamma p_j
+	\]
+	which leads to \(y^{(j)} = \frac{\lambda_j}{\gamma p_j}\). Taking the
+	derivative with regards to the Lagrange multiplier \(\gamma\) leads to
+	\[
+		L_i\|w_i\|_\infty = \langle p, y\rangle
+		= \sum_{j=1}^\dims p_j \frac{\lambda_j}{\gamma p_j}
+		= \frac{\sum_{j=1}^\dims \lambda_j}\gamma
+	\]
+	and thus \(\gamma = \frac{\sum_{j=1}^\dims \lambda_j}{L_i\|w_i\|_\infty}\).
+	This implies with \eqref{eq: fixed budget and consumption relation}
+	\[
+		y^{(j)}
+		= \frac{\|w_i\|_\infty}{p_j}
+		\underbrace{L_i\frac{\lambda_j}{\sum_{j=1}^\dims \lambda_j}}_{=L_i^{(j)}}.
+	\]
+	Now we uses this result to define the remaining utility function in \(L_i\) 
+	to be optimized
+	\[
+		u(L_i) = \lambda_0 \ln(1-L_i) + \sum_{j=1}^\dims \lambda_j \left[
+			\ln(\|w_i\|_\infty) + \ln(L_i) + \ln\Bigl(\frac{\lambda_j}{p_j\sum_{j=1}^\dims \lambda_j}\Bigr)
+		\right]
+	\]
+	Finally we take the derivative with regards to \(L_i\) to get
+	\[
+		0\overset!= -\frac{\lambda_0}{1-L_i}
+		+ \left[
+			\frac{\frac{d}{dL_i}\|w_i\|_\infty}{\|w_i\|_\infty}
+			+ \frac1{L_i}
+		\right]\sum_{j=1}^\dims \lambda_j.
+	\]
+	Using \(\frac{d}{dL_i}\|w_i\|_\infty = 0\) 
+	and multiplying the entire equation by \(L_i(1-L_i)\) we get
+	\[
+		0\overset!= -\lambda_0L_i + (1-L_i)\sum_{j=1}^\dims \lambda_j.
+	\]
+	This immediately leads to our final claim
+	\[
+		L_i = \frac{\sum_{j=1}^\dims \lambda_j}{\sum_{j=0}^\dims \lambda_j}.
+		\qedhere
+	\]
+\end{proof}
+
+\subsubsection{Top-\texorpdfstring{\(k\)}{k} Model}
+
+A person might only have time for \(k\) movies every week, so they will choose
+their top \(k\) from a ranked list.

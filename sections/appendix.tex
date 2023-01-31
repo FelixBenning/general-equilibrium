@@ -35,12 +35,14 @@ set of slopes a lower tangent at \(x_0\) may have, by reordering the requirement
 \]
 
 \begin{lemma}[Subgradients of Support Functions]
+	\label{lem: subgradient of support functions}
 	\[
-		\argmax_{x\in X}\langle p, X\rangle \subseteq \partial_p \mu(p, X)
+		\argmax_{x\in X}\langle p, X\rangle = \partial_p \mu(p, X)
 	\]
 \end{lemma}
 \begin{proof}
-	Let \(x^* \in \argmax_{x\in X}\langle p, X\rangle\). Then by definition
+	``\(\subseteq\)'': Let \(x^* \in \argmax_{x\in X}\langle p, X\rangle\). Then
+	by definition
 	\begin{equation}
 		\label{eq: x^* is opt w.r.t. p}
 		\mu(p, X) = \langle p, x^*\rangle
@@ -58,4 +60,6 @@ set of slopes a lower tangent at \(x_0\) may have, by reordering the requirement
 		= \langle x^*, q-p\rangle.
 	\]
 	So by definition of the subgradient \(x^*\in \partial_p \mu(p, X)\).
+
+	\fxnote*{other direction}{``\(\supseteq\)'':}
 \end{proof}
