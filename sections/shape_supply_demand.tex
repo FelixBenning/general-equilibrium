@@ -211,7 +211,7 @@ The average demand for product \(j\) is then given by
 \begin{align*}
 	\tfrac1n D^{(j)}(p)
 	&= \frac1n\sum_{i=1}^n(
-		1- \ind_{Z_i^{(j)}\|w_i^{(-j)}\|_\infty \le p_j}
+		1- \ind_{\wtb_i^{(j)}\le p_j}
 		\ind_{Z_i^{(j)}\le l_i^{(j)}}
 	)\\
 	&\to\begin{aligned}[t]
@@ -232,9 +232,12 @@ The average demand for product \(j\) is then given by
 	\end{aligned}
 \end{align*}
 Here \(F_{\wtb_1^{(j)}}\) denotes the cumulative distribution function of the
-willingness to buy for product \(j\). If the probability that people are
-willing to do it themselves (DIY) is small, which is likely for a large number
-of products, then due to
+willingness to buy for product \(j\). The Glivenko-Cantelli theorem can be
+adapted to this case to prove the convergence is uniform in \(p_j\), since it
+only uses monotonicity.
+
+If the probability that people are willing to do it themselves (DIY) is small,
+which is likely for a large number of products, then due to
 \[
 	0
 	\le \underbrace{\Pr(\wtb_1^{(j)} \le p_j,\; Z_1^{(j)} > l_1^{(j)})}_{
