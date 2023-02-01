@@ -390,7 +390,36 @@ and given by
 	\]
 \end{proof}
 
-\subsubsection{Top-\texorpdfstring{\(k\)}{k} Model}
+\subsubsection{Knapsack Consumption Model}
 
-A person might only have time for \(k\) movies every week, so they will choose
-their top \(k\) from a ranked list.
+In this section, we want to model the consumption of experiences, e.g. movies.
+As consumption requires time, we have durations \(D=(D_j)_{j\le \dims}\) to
+consume product \(j\). Let the available products be \(x^{(j)}\in \{0,1\}\) and
+let \(U_i=(U_i^{(j)})_{j\le \dims}\) be the utility person \(i\) derives from
+the consumption of product \(j\). Then the utility function is of the form
+\[
+	u(f, x) = \max\{
+		\langle U, y\rangle : \underbrace{y\in \{0,1\}^\dims,\; y\precsim x}_{\mathclap{\text{sub-selection for consumption}}},\;
+		\overbrace{\langle D, y\rangle \le f}^{\text{time constraint}}
+	\}.
+\]
+So our individual decision
+\[
+	\max_{x, L_i}u(1-L_i, x) \quad\text{s.t.}\quad
+	\langle p, x\rangle \le \mu(p, X_i(L_i))
+\]
+is equivalent to
+\[
+	\max_{L_i}\; \max\{
+		\langle U, y\rangle: y\in \{0,1\}^\dims,\;
+		\langle D, y \rangle \le 1-L_i,\;
+		\langle p, y\rangle \le \mu(p, X_i(L_i))
+	\}.
+\]
+We therefore have to solve a ``2d Knapsack Problem'' for every \(L_i\) and then
+optimize over \(L_i\).
+Since this problem is NP-hard, we can not really solve them. But at the same
+time individual \(i\) will struggle to solve it as well. So if we use a
+heuristic it might capture \(i\)'s decisions perfectly if they use the same
+heuristic. One very common heuristic is the Greedy heuristic.
+
