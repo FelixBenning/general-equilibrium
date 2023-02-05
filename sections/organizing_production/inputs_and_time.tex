@@ -1,3 +1,78 @@
 \subsection{Inputs and Time}
 \label{sec: inputs and time}
 
+We have not considered possible material inputs needed for production so far.
+The only input necessary was time. But people typically do not build things
+completely from the ground up. A different person typically gathers materials
+than the person who uses them in production. So we need to model inputs. If we
+allow \(X_i\) to be outside of \(\real_{\ge 0}^\dims\), negative entries
+represent the consumption of some good for production.
+
+\subsubsection{Variable Cost Production with Inputs}
+
+Let us now consider a specific example. 
+\[
+	h_{\cdot k} = (h_{1k},\dots, h_{\dims k})\]
+is production method \(k\). Completing one cycle of production results in the
+production of \(h_{jk}\) units of good \(j\). If \(h_{jk}\) is negative, this
+was an input. Typically most entries are zero, some are negative and one is
+positive. Let \(v = (v_k)_{k\le m}\) denote the number of production cycles for
+each production method. Then for \(H=(h_{jk})_{j\le\dims,k\le m}\) our total
+production is given by
+\[
+	x = Hv.
+\]
+Let \(l_i^{(k)}\) denote the labour requirements of person \(i\) to complete
+one cycle of production method \(k\). Then their production capabilities are
+given by
+\[
+	X_i = \low(\{ Hv : v\in \real_{\ge 0}^\dims, \langle v, l_i\rangle \le L_i\}).
+\]
+where \(\low(M):=\{x\in \real^{\dims}: \exists y\in M,\; x\precsim y\}\) denotes
+the smallest set containing \(M\) which is a \ref{eq: lower layer}. If one does
+not want to allow partial production cycles, one could also require
+\(v\in\nat^\dims\). Although this would result in a difficult unbounded
+Knapsack problem once we state the income maximization problem
+\[
+	\mu(p, X_i)	= \sup_{y\in X_i} \langle y, p\rangle.
+\]
+The greedy approach to the Knapsack problem
+would convert this problem back into the continuous case, which we can solve
+explicitly as follows:
+
+\begin{lemma}[Income in Variable Cost Production with Inputs Case]
+	For reasonable prices \(p\in \real_{\ge 0}^\dims\), we have
+	\[
+		\mu(p, X_i)
+		= L_i \max_{j=1,\dots,d}
+		\underbrace{\frac{(H^T p)_k}{l_i^{(k)}}}_{=:w_i^{(k)}}
+		= L_i \underbrace{\|w_i\|_\infty}_{\text{wage}}.
+	\]
+	\((H^T p)_k\) is the net profit of production method \(k\) before labour
+	costs. In other words, revenue from the sale of outputs minus cost of inputs.
+\end{lemma}
+\begin{proof}
+	We can assume without loss of generality
+	\[
+		X_i = \{ Hv : v\in \real_{\ge 0}^\dims, \langle v, l_i\rangle \le L_i\},
+	\]
+	as the income from any \(y\precsim x\) with \(x\in X_i\) is lower or equal
+	to the income from \(x\). Then we have
+	\[\begin{aligned}
+		\mu(p, X_i)
+		&= \sup\{
+			\langle Hv, p\rangle :
+			v\in \real_{\ge 0}^\dims,\; \langle v, l_i\rangle \le L_i
+		\}\\
+		&= \sup\{
+			\langle v, H^T p\rangle :
+			v\in \real_{\ge 0}^\dims,\; \langle v, l_i\rangle \le L_i
+		\}
+	\end{aligned}\]
+	From here the proof is the same as in Lemma~\ref{lem: income in the pure variable cost case}
+	using \(H^T p\) in place of \(p\).
+\end{proof}
+
+Adding fixed costs \(f^{(k)}_i\) to enable production method \(k\) for person
+\(i\) is a similarly straightforward generalization from Lemma~\ref{lem: income
+in mixed case} resulting in average costs \(\bar{l}_i^{(k)}\).
