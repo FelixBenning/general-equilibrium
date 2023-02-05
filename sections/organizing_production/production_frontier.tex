@@ -1,0 +1,226 @@
+\subsection{Production Frontier}
+\label{sec: production frontier}
+
+We define the production frontier as the set of points which can not be
+achieved by producing a different vector and then throwing away things:
+\[
+	\pf(X) := \{ x\in X : \nexists y\in X \text{ with } x\prec y\}
+\]
+where \(x\prec y\) is defined to be \(x^{(i)} \le y^{(i)}\) for all \(i\) and
+there exists at least one \(i\) where the inequality is strict.
+
+\begin{theorem}[Positive prices lead to efficient production]
+	We always have
+	\[
+		\bigcup_{p\in \real_{>0}^\dims} \argmax_{y\in X}\langle p, y\rangle
+		\subseteq \pf(X).
+	\]
+\end{theorem}
+\begin{proof}
+	For any \(p\in\real_{>0}^\dims\) we have
+	\[
+		\argmax_{y\in X}\langle p, y\rangle \subseteq \pf(X).
+	\]
+	Because if we take any \(x\) from the first
+	set, and assume there would exist \(x_+\in X\) with \(x\prec x_+\), then we
+	would have \(\langle x, p\rangle < \langle x_+, p\rangle\) following from
+	\(p\in \real_{>0}^\dims\). But that is a contradiction. Therefore
+	\(x\in\pf(X)\). Taking the union over all such \(p\) implies our claim.
+\end{proof}
+
+\fxnote{this deserves a picture}
+A reasonable question to ask is, whether we also have \(\supseteq\). If we
+consider the Ball around the origin \(X := B(0,1)\cap \real_{\ge 0}^\dims\),
+then it is quite obvious that \(x=(1,0,\dots,0)\in \pf(X)\). But this point is
+only reachable with \(p=(p_1,0,\dots,0)\) for some positive \(p_1\). So we do
+not have \(\supseteq\) for strictly positive prices.
+
+The natural follow up question is, whether non-negative prices would be a better
+characterization. But if some prices were zero, we could throw away this product
+without impacting the optimization problem. But we would leave the production
+frontier. Therefore for \(p\in\real_{\ge 0}^\dims\) we do not have
+\(\subseteq\). But we will essentially get \(\supseteq\) instead (cf.
+Theorem~\ref{thm: prices facilitate reasonable production}). So we can sandwich
+our production frontier between positive prices and non-negative prices.
+
+We therefore conjecture that under some continuity assumptions the closure
+\[
+	\overline{\bigcup_{p\in\real_{>0}^\dims} \argmax_{y\in X}\langle p,y\rangle},
+\]
+might be equal to the production frontier.
+
+\begin{lemma}[Production Frontier is part of the Boundary of X]
+	\label{lem: prod frontier part of boundary}
+	\[
+		\pf(X)\subseteq \partial X
+	\]
+\end{lemma}
+\begin{proof}
+	For any \(x=(x^{(1)},\dots, x^{(\dims)})\in X^\circ\) exists \(\epsilon>0\)
+	such that \(x_{+\epsilon} = (x^{(1)}+\epsilon, \dots, x^{(\dims)}+\epsilon)\)
+	is an element of \(X\). But then \(x\) can not be an element of \(\pf(X)\),
+	since \(x \prec x_{+\epsilon}\).
+\end{proof}
+
+To characterize the production frontier further, we are going to assume
+convexity of \(X\). We have motivated the asymptotic convexity of the
+average production capabilities \(\bar{X}_n\) in Lemma~\ref{lem: clone prod
+cap}. While this asymptotic convexity does not translate to convexity of \(X\)
+one could easily replace \(X\) with \(\bar{X}_n\) in the following, at the
+expense of notational simplicity.
+
+\begin{lemma}[Duality of Support Function]
+	\label{lem: duality of support function}
+	If \(X\) is a compact, convex \ref{eq: lower
+	layer}, then for any \(x\in \partial X\), there exists
+	\(p\neq 0\) such that
+	\begin{equation}
+		\label{eq: prod frontier p}
+		x \in \argmax_{y\in X} \langle p, y\rangle %= \nabla_p \mu(p, X)
+	\end{equation}
+	and therefore
+	\[
+		\mu(p, X) = \langle p, x\rangle.
+	\]
+	If additionally \(x\in\real_{>0}^\dims\), then necessarily \(p\in\real_{\ge
+	0}^\dims\) if \(p\) satisfies \eqref{eq: prod frontier p}.
+\end{lemma}
+\begin{proof}
+	Let \(x\in \partial X\), define \(A:=X^\circ\) and \(B:=\{x\}\). Then \(A\)
+	is open; \(A\) and \(B\) are disjoint, nonempty
+	convex subsets of \(\real^\dims\). So by the hyperplane separation theorem
+	there exists
+	\(0\neq p\in\real^\dims\) and \(c\in\real\) with
+	\[
+		\forall y\in A : \langle y, p\rangle < c
+		\qquad\text{and}\qquad
+		\langle x, p\rangle \ge c.
+	\]
+	Due to continuity of the scalar product we also have \(\langle y, p\rangle
+	\le c\) for all \(y\in X\). Since \(x\in X\) this implies
+	\begin{equation}
+		\label{eq: x is max w.r.t. p}
+		\langle y, p\rangle \le c = \langle x, p\rangle \quad \forall y\in X
+	\end{equation}
+	Therefore \(x\in\argmax_{y\in X} \langle p, y\rangle\) and \(\mu(p, X) =
+	\langle x, p\rangle\).
+
+	Let us now consider \(x=(x^{(1)},\dots,x^{(\dims)})\in\real_{>0}^\dims\).
+	To arrive at a contradiction, we assume \(p_i < 0\). Since \(x^{(i)}>0\) and
+	\(X\) is a \ref{eq: lower layer}, we can replace the entry \(x^{(i)}\) with
+	\(0\) to obtain \(\tilde{x}\in X\). Then
+	\[
+		\langle \tilde{x}, p\rangle
+		= \sum_{\substack{j=1\\i\neq j}} x^{(j)} p_j
+		> \underbrace{x^{(i)}}_{>0}\underbrace{p_i}_{<0}
+		+ \sum_{\substack{j=1\\i\neq j}} x^{(j)} p_j
+		= \langle x, p\rangle,
+	\]
+	which is a contradiction to \eqref{eq: x is max w.r.t. p}.
+\end{proof}
+
+Since we want to avoid negative prices though, we want to refine this duality
+lemma to the following theorem. Since we mostly have considered \(X\subseteq
+\real_{\ge 0}^\dims\) so far, the intersection might surprise you. The
+motivation for this will become clear in Section~\ref{sec: inputs and time}.
+We have purposefully been somewhat vague when defining the \ref{eq: lower layer}
+property since it changes the shape of \(X\) depending on whether we consider
+the total space to be \(\real^\dims\) or \(\real_{\ge 0}^\dims\). None of the
+proofs so far were really dependent on this choice. The case \(x=0\) in the
+following theorem would be much simpler when \(X\) is viewed as a subset of
+\(\real_{\ge 0}^\dims\), but we will be grateful for the generality later on.
+
+
+\begin{theorem}[Prices can facilitate any reasonable production target]
+	\label{thm: prices facilitate reasonable production}
+	If \(X\) is a compact, convex \ref{eq: lower layer}, then
+	\[
+		\pf(X)\cap \real_{\ge 0}^\dims \subseteq
+		\bigcup_{p\in \real_{\ge 0}^\dims\setminus\{0\}}
+		\argmax_{y\in X}\langle p, y\rangle.
+	\]
+	I.e. for any point \(x\succeq 0\) on the production frontier, there exist
+	non-negative prices \(p\) such that maximization with regards to \(p\) leads
+	to production of \(x\).
+\end{theorem}
+
+\begin{proof}
+	Chose any \(x\in \pf(X)\cap \real_{\ge 0}^\dims\). 
+
+	Let us first consider the case \(x=0\). By definition of the production
+	frontier \(X\cap \real_{\ge 0}^\dims=\{0\}\).  Due to \(x\in \partial X\) and
+	Lemma~\ref{lem: duality of support function}, there exists some \(p\neq 0\)
+	such that
+	\[
+		0\in A(p) := \argmax_{y\in X}\langle p, y\rangle
+	\]
+	The plan is now to replace all negative entries of \(p\) with zero to obtain
+	\(\tilde{p}\), and show 
+	\[
+		0 \overset{\text{(i)}}\in A(\tilde{p})
+		\overset{\text{(ii)}}\subseteq A(p)
+		\overset{\text{(iii)}}\subsetneq X \overset{\text{(iv)}}= A(0)
+	\]
+	which proves that \(\tilde{p}\neq 0\) and is therefore what we are looking
+	for. (iv) follows directly from the definition of \(A\). (iii) only holds
+	without loss of generality. If it would not hold, take w.l.o.g. \(0\neq y\in X\)
+	(if \(X=\{0\}\) everything would be trivial) then for \(0,y\in A(p)\) to be
+	true, we need \(\langle p, y\rangle =0\). But due to \(\{0\}=X\cap \real_{\ge
+	0}\) all entries of \(y\) have to be negative. Therefore at least one entry
+	of \(p\) needs to be positive. If we set all negative entries of \(p\) to
+	zero, this positive entry remains and we only need (i) as \(\tilde{p}\neq 0\)
+	is a given.
+
+	What remains are (i) and (ii). So let \(y\in A(\tilde{p})\subseteq X\).
+	Since either all entries of \(y\) are negative or \(y=0\) due to
+	\(\{0\} = X\cap\real_{\ge 0}^\dims\), we have
+	\[
+		\langle y, \tilde{p}\rangle
+		= \sum_{j=1}^\dims \underbrace{y^{(j)}}_{\le 0}
+		\underbrace{\tilde{p}_j}_{\ge 0}
+		\overset{p_j\le \tilde{p}_j}\le \sum_{j=1}^\dims y^{(j)} p_j
+		= \langle y, p\rangle
+		\overset{p\in A(p)}= \langle 0, \tilde{p}\rangle.
+	\]
+	The inequality needs to be an equality since \(y\in A(\tilde{p})\). But this
+	proves \(\langle y, \tilde{p}\rangle = 0\) which implies \(y\in A(p)\) and
+	thus (ii). Due to the same equality we also have (i).
+	
+	Now we move on to the case \(x\neq 0\). Let \(I\) be the set of indices \(i\)
+	where \(x^{(i)}\neq 0\). We now consider the subspace
+	\[
+		\real^I := \{y\in \real^\dims : y^{(i)} = 0, \quad \forall i \in I^\complement\}
+	\]
+	which can be identified with \(\real^{|I|}\). \(X\cap\real^I\) is a compact,
+	convex \ref{eq: lower layer} again and it is straightforward to verify
+	\[
+		x\in \pf(X)\cap \real^I
+		\subseteq \pf(X\cap \real^I)
+		\overset{\text{Lem.~\ref{lem: prod frontier part of boundary}}}\subseteq
+		\partial(X\cap\real^I).
+	\]
+	So by Lemma~\ref{lem: duality of support function} there exists \(p\in
+	\real^I\setminus \{0\}\), such that 
+	\begin{equation}
+		\label{eq: x is optimal w.r.t. p on subspace}
+		x\in \argmax_{y\in X\cap\real^I} \langle p, y\rangle.
+	\end{equation}
+	And as \(x\in\real_{>0}^I\) by definition of \(I\), we have \(0\neq
+	p\in\real_{\ge 0}^I\). Interpreting \(p\) as a member of \(\real_{\ge
+	0}^\dims\) again, we can finish this proof if we can show that for this \(p\)
+	\[
+		x\in\argmax_{y\in X}\langle p, y\rangle.
+	\]
+	Assume that this were not the case. Then there would exist \(x_+\in X\)
+	such that
+	\[
+		\sum_{i\in I}p_i x^{(i)}
+		= \langle p, x\rangle
+		< \langle p, x_+\rangle
+		\overset{p\in\real^I}= \sum_{i\in I} p_i x_+^{(i)}
+	\]
+	As the \(x^{(i)}_+\) for \(i\notin I\) do not contribute to the scalar product,
+	we can w.l.o.g. replace them with \(0\) due to the lower layer property.
+	But then \(x_+\in X\cap \real^I\), which is a contradiction to \eqref{eq: x
+	is optimal w.r.t. p on subspace}.
+\end{proof}

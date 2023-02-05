@@ -1,0 +1,44 @@
+\subsection{Prices as a Measure of Effort}
+
+In the hopes that we justified ownership, trade and prices sufficiently, let us
+consider this in more detail. We have suggested using \(l^{(j)}_i\) as prices
+(i.e. the effort required for production).  This implies that one good \(j\) has
+different prices, depending on the producer \(i\). Since we assume that there
+are no quality differences, people will obviously buy the cheaper products
+first. Let \(p_j\) be the largest price for which good \(j\) is ever sold.
+Potential producers \(i\) with \(l^{(j)}_i > p_j\) refrain from producing good
+\(j\) and focus their attention on other products.
+
+The producers with \(l^{(j)}_i < p_j\) now see, that they could have sold their
+goods for more. And since the cost of production \(l^{(j)}_i\) is private
+information, they will likely claim that this cost went up a little next time.
+I.e. in the long run, only one prices \(p_j\) per good \(j\) is stable.
+\begin{quotation}
+\noindent Price \(p_j\) roughly measures the effort required to produce \(j\) by
+the least efficient producer of \(j\).
+\end{quotation}
+
+The question remains: What is the right price? Should we average the
+\(l^{(j)}_i\) somehow?
+
+Since we are implicitly selecting the cutoff of who is going to produce \(j\) by
+setting \(p_j\) and we want to ensure supply to be equal to demand \(S=D\), it
+turns out we have very little choice when it comes to prices anyway. Let us see
+what happens for a fixed price vector. We want \(S=D\). This obviously implies
+\begin{equation}
+	\label{eq: supply gdp = demand gdp}
+	0 =\langle S-D,p\rangle =  \sum_{i=1}^n \langle S_i - D_i, p\rangle
+\end{equation}
+A market based system on the other hand ensures
+\[
+	0 = \langle S_i - D_i, p\rangle
+	= \underbrace{\langle S_i, p\rangle}_{\text{income}}
+	- \underbrace{\langle D_i,p\rangle}_{\text{expenses}}
+\]
+which is more than sufficient for the sums in Equation~\eqref{eq: supply gdp =
+demand gdp} to be equal, but not sufficient for \(S=D\). In fact, it only
+ensures that the price is orthogonal to the demand/supply mismatch \(S-D\).
+If there are \(d\) products, that leaves a \(d-1\) hyperplane.
+
+But as we will see, there are some price vectors, which do ensure \(S=D\).
+We call these economic equilibria.

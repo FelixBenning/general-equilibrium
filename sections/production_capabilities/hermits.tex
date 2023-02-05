@@ -1,12 +1,21 @@
-\section{Hermits}
+\subsection{Hermits}
 
-Let \(X_i = X_i(L_i)\subseteq \real_{\ge 0}^\dims\) be the set of possible production vectors of person \(i\)
+Let \(X_i = X_i(L_i)\) be the set of possible production vectors of person \(i\)
 under labour constraint \(L_i\). Since we can always throw away stuff, we
-assume \(X_i\) has the property
+assume \(X_i\) has the property\footnote{
+	Careful readers might have noticed that the shape of \(X_i\) changes greatly
+	depending on the space we are allowed to pick \(x\) from. The two main spaces
+	of interest are \(\real_{\ge 0}^\dims\) and \(\real^\dims\). It is often more
+	convenient to define \(X\) as a subset of the former. But it is not
+	complicated to translate those examples to \(\real^\dims\) by applying the
+	\ref{eq: lower layer} property. This will become essential in
+	Section~\ref{sec: inputs and time}. Until then we will be a bit vague about
+	it.
+}
 \[
 	\label{eq: lower layer}
 	\tag{lower layer}
-	y\in X_i,\ x\in\real_{\ge 0}^\dims \text{ and } x\preceq y \implies x\in X_i.
+	y\in X_i \text{ and } x\preceq y \implies x\in X_i.
 \]
 Where \(x \preceq y\) should be understood entry wise, i.e. \(x^{(i)} \le
 y^{(j)}\) for all \(j\).

@@ -1,0 +1,146 @@
+\subsection{Shape of Supply}
+
+We are interested in the average supply
+\[
+	\tfrac1n S(p) = \frac1n \sum_{i=1}^n S_i(p)
+	= \frac1n\sum_{i=1}^n \partial_p\mu(p, X_i)
+	= \partial_p \tfrac1n \mu(p, X)
+	= \partial_p \mu(p, \bar{X}_n),
+\]
+where we have used the linearity of support functions with regards to Minkowski
+sums and linearity of the subgradient in the last two equations. We are now
+going to delay taking the subgradient until later and consider the average
+income
+\[
+	\mu(p,\bar{X}_n)
+	= \frac1n \sum_{i=1}^n \mu(p, X_i)
+	= \frac1n \sum_{i=1}^n L_i \|w_i\|_\infty
+	\overset{\text{SLLN}}\to \E[L_1 \|w_1\|_\infty] \quad (n\to\infty).
+\]
+Where it is not unreasonable to assume that the work times and wages
+\(L_i\|w_i\|_\infty\) are iid random variables as we draw from a population of
+people.
+
+Unfortunately we now have lost all dependence on \(p\) which makes it impossible
+to take the derivative. To enable us to do this, we need some form of parametric
+model. So we turn to our fixed \& variable cost mixed case. Here we assume that
+the average time requirements \(\bar{l}_i= (\bar{l}_i^{(1)}, \dots,
+\bar{l}_i^{(\dims)})\) are iid random vectors. But as it will make notation
+later on easier, we are going to convert these average time requirements into
+(similarly independent) units per time
+\[
+	Q = (Q_1,\dots, Q_\dims)
+	= \Bigl(\frac1{\bar{l}_1^{(1)}}, \dots, \frac1{\bar{l}_1^{(\dims)}}\Bigr).
+\]
+Furthermore we are going to assume \(L_i=L_1\) is constant, which is not
+completely unreasonable given \(40\) hour work weeks\footnote{
+	We only really use this to move it out of the expectation so you could
+	alternatively assume independence to factorize the expectation. While this
+	is mathematically more general since constant random variables are trivially
+	independent from all others, it does not offer a real generalization. Because
+	we already argued that wages are increasing in \(L_i\). So if \(L_i\) was
+	not constant it certainly is not independent from \(\|w_i\|_\infty\).
+}.
+Finally we use the well known formula for the expectation of positive random
+variables\footnote{
+	Let \(X\) be an almost surely positive random variable, then
+	\[
+		\E[X]	= \int_0^\infty x d\Pr_X(x)
+		\overset{\text{Fub.}}= \int_0^\infty \int_0^\infty \ind_{t < x}d\Pr_X(x)dt
+		= \int_0^\infty 1- \Pr(X \le t)dt.
+	\]
+} to get
+\begin{align*}
+	\E[L_1\|w_1\|_\infty]
+	&= L_1 \E[\|w_1\|_\infty]
+	= L_1 \int_0^\infty 1 - \Pr(\|w_1\|_\infty \le x)dx\\
+	&= L_1 \int_0^\infty 1- \Pr\Bigl(\max_j \frac{p_j}{\bar{l}_1^{(j)}} \le x\Bigr)dx\\
+	&= L_1 \int_0^\infty 1- 
+	\underbrace{
+		\Pr\Bigl(Q_1 \le \frac{x}{p_1}, \dots, Q_\dims \le \frac{x}{p_\dims}\Bigr)
+	}_{=: F(\frac{x}{p_1},\dots,\frac{x}{p_\dims})}dx.
+\end{align*}
+We therefore get
+\[
+	\mu(p, \bar{X}_n)
+	\to L_1\int_0^\infty 1- F\bigl(\tfrac{x}{p_1},\dots,\tfrac{x}{p_\dims}\bigr)dx
+	=: h(p)
+\]
+Since \(h\) retains all the properties of a support function as a limit of
+support functions, there exists some set \(X^\infty\) such that \(\mu(p,
+X^\infty)=h(p)\)\fxnote{does the set limit hold we defined earlier?}. In this
+sense we have \(\bar{X}_n\to X^\infty\). We now want to consider the limit
+supply
+\begin{align*}
+	S_\infty(p)
+	&:= \partial_p \mu(p, X^\infty)\\
+	&= L_1 \int_0^\infty \nabla_p
+	\Bigl(1-F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\Bigr)dx\\
+	&=L_1 \begin{pmatrix}
+		\int_0^\infty 
+		\frac{\partial}{\partial x_1}
+		F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\frac{x}{p_1^2}dx
+		\\\vdots\\
+		\int_0^\infty 
+		\frac{\partial}{\partial x_\dims}
+		F\bigl(\tfrac{x}{p_1},\dots, \tfrac{x}{p_\dims}\bigr)\frac{x}{p_\dims^2}dx
+	\end{pmatrix}\\
+	\overset{y=\frac{x}{p_j}}&=L_1 \begin{pmatrix}
+		\int_0^\infty 
+		\frac{\partial}{\partial x_1}
+		F\bigl(\tfrac{p_1}{p_1}y,\dots, \tfrac{p_1}{p_\dims}y\bigr)ydy
+		\\\vdots\\
+		\int_0^\infty 
+		\frac{\partial}{\partial x_\dims}
+		F\bigl(\tfrac{p_\dims}{p_1}y,\dots, \tfrac{p_\dims}{p_\dims}y\bigr)ydy
+	\end{pmatrix},
+\end{align*}
+where we have somewhat optimistically swapped differentiation with integration
+and replaced the subgradient with an actual gradient assuming that \(F\) is
+differentiable and the subgradient thus unique. Let us now assume \(F\) to be
+absolutely continuous with density \(f\). Then keeping in mind that \(Q_k\) are
+positive
+\begin{align*}
+	\frac{\partial}{\partial x_\dims}F(x_1,\dots, x_\dims)
+	&= \int_0^{x_1} \dots \int_0^{x_{\dims-1}}
+	f(y_1,\dots, y_{\dims-1},x_\dims) dy_1\dots dy_{\dims-1}\\
+	&= \idotsint \prod_{j=1}^{\dims-1} \ind_{y_j\le x_j}
+	f(y_1,\dots, y_{\dims-1},x_\dims) dy_1\dots dy_{\dims-1}.
+\end{align*}
+So the supply for product \(\dims\) converges to
+\begin{align*}
+	S_\infty^{(\dims)}(p) 
+	&=L_1\int_0^\infty
+	y_\dims
+	\frac{\partial}{\partial x_\dims} F\bigl(
+		\tfrac{p_\dims}{p_1}y_\dims,
+		\dots,
+		\tfrac{p_\dims}{p_{\dims-1}}y_\dims, y_\dims
+	\bigr) dy_\dims\\
+	&= L_1 \idotsint y_\dims\prod_{j=1}^{\dims-1}\ind_{y_j\le \frac{p_\dims}{p_j}y_\dims}
+	f(y_1,\dots,y_\dims)dy_1\dots dy_\dims\\
+	&= L_1 \E\Bigl[
+		Q_\dims \prod_{j=1}^{\dims-1}\ind_{p_jQ_j\le p_\dims Q_\dims}
+	\Bigr].
+\end{align*}
+Similarly we get for all other products
+\[
+	S_\infty^{(k)}(p)
+	= L_1 \E\Bigl[
+		Q_k \prod_{\substack{j\le\dims\\j\neq k}}\ind_{p_jQ_j\le p_k Q_k}
+	\Bigr].
+\]
+It is quite obvious that the supply of unit \(k\), \(S^\infty_k(p)\), is
+monotonously increasing in \(p_k\).  If we further assume \(\E[Q_k]<\infty\), we
+get by dominated convergence
+\[
+	\lim_{p_k\to \infty}S_\infty^{(k)}(p) = L_1\E[Q_k]
+	\qquad\text{and}\qquad
+	\lim_{p_k\to 0}S_\infty^{(k)}(p) = 0.
+\]
+If you recall that \(Q_k\) denotes the units of \(k\) per time a random
+person can produce, this makes perfect sense. If the price increases to infinity
+all efforts would go towards producing good \(k\). So we multiply the labour
+time by the average number of units of \(k\) a person produces to obtain the
+average supply. Similarly nobody will produce good \(k\) if the price goes to
+zero.
