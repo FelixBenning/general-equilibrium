@@ -1,0 +1,17 @@
+\subsection{Decentral Decisions}
+
+Now that we know, that we can reach any point on the production frontier by
+maximizing the scalar product with regards to some price \(p\), we want to
+use the linearity of the support function with regards to Minkowski sums to
+decentralize the decision making.
+So here is all the magic
+\[
+	\sup_{y\in X}\langle p, y\rangle
+	= \mu(p, X)
+	= \mu\Bigl(p, \sum_{i=1}^n X_i\Bigr)
+	\overset{\text{linear}}= \sum_{i=1}^n \mu(p, X_i)
+	= \sum_{i=1}^n \sup_{y\in X_i} \langle p, y\rangle.
+\]
+So each individual can solve their own maximization problem (maximize their
+income) and the end result will be the same as if you had maximized over total
+production \(X\).
