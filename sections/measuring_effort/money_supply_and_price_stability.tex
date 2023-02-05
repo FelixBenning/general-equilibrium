@@ -1,0 +1,74 @@
+\subsection{Money Supply and Price Stability}
+\label{subsec: money supply and price stability}
+
+Since everyone simply ensures that their income is equal to their expenses, i.e.
+that \(S_i - D_i\) is orthogonal to \(p\)
+\[
+	0 = \langle S_i - D_i, p\rangle,
+\]
+scaling of \(p\) has no effect on anyone's decision. So if \(p^*\) is an
+economic equilibrium, so is \(cp^*\) for every \(c\in \real_{>0}\). So it
+appears we have a surplus of one degree of freedom for \(p\). As it will turn
+out, we lose that degree of freedom to the money supply.
+The gross domestic product (GDP) is defined to be the sum of all transactions.
+One way to calculate it, is to sum up all sales made by each individual
+\[
+	\text{GDP} = \sum_{i=1}^n \langle p, S_i\rangle = \langle p, S\rangle.
+\]
+If our economy runs on money (instead of some tally) on the other hand, there
+is typically a fixed supply \(M\). If people receive payment at the start of
+the month (wages) and spend it during the month, then the entire money supply
+will be used once per month. This is of course a bit too simplistic, but the
+point here is, that the money velocity \(V\) (i.e. the amount of times the same
+coin changes hands per month or other time unit) is typically externally fixed.
+But if we want to sum all transactions, and we know the size of the money supply
+and also its cycle velocity, then we already know the total size of all
+transactions:
+\[
+	\text{GDP} = MV.
+\]
+So it is necessarily true, that 
+\begin{equation}
+	\label{eq: nominal GDP equation}
+	\langle p, S\rangle = MV.	
+\end{equation}
+If the society now manages to produce \(rS\) more of everything, resulting
+in \(\tilde{S} = (1+r) S = cS\) then prices necessarily need to adjust to
+\(\tilde{p} = \tfrac1c p\) to ensure that \eqref{eq: nominal GDP equation}
+remains true, i.e.
+\[
+	\langle \tilde{p}, \tilde{S}\rangle = \langle \tfrac1c p, cS\rangle = MV.
+\]
+So if an economy grows with fixed money supply and velocity prices have to
+shrink at the same rate, resulting in deflation. If an economy contracts on the
+other hand, inflation would be the result.
+
+Inflation and Deflation causes funky effects if one is able to carry over
+money from one period to another. Because under inflation, this devalues earlier
+work causing people to consume as quickly as possible. Deflation (falling
+prices) on the other hand causes people to delay consumption. If consumption is
+delayed long enough, then production \(S\) will also shrink again. This reduces
+deflation, but also causes the economy to shrink senselessly. While inflation
+does not have such an effect on actual production, too much of it is still
+undesirable. For this reason central banks usually target \(0-2\%\) of inflation
+to steer clear of deflation.
+
+Due to advancements in technology and population growth, growth of \(S\) is much
+more common than shrinkage.  So to avoid deflation it is vital to increase
+the money supply \(M\) in pace with \(S\) unless the money velocity changes for
+some reason.
+
+Cryptocurrencies typically do not allow quantity adjustments by design and are
+therefore rubbish as a currency.
+
+The gold standard (and similar) use the remaining degree of freedom to fix the
+price of a single good (gold). This comes at the expense of price stability
+of all other prices. Assuming the supply of gold remains fixed while the rest
+of the economy grows, this too causes deflation. Discoveries of large quantities
+of gold increase the money supply on the other hand, causing an inflationary
+shock.
+
+No matter what system an economy uses, the takeaway is, that the superfluous
+degree of freedom in \(p\) is removed by the money supply. And since anyone can
+create money (it is just debt after all), determining and steering this supply
+is a science in itself making the work of central banks quite difficult.

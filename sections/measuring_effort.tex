@@ -1,0 +1,99 @@
+\section{Measuring Effort}
+
+While \(\bar{X}_n\) is great to build intuition about societies of people, all
+its elements are \(n\)-th portions of some total production vector \(x\in X\).
+This suggests that everyone would consume the exact same things. And while
+clones are great and all, that is not what we are interested in. So how could
+multiple people share the goods they produced, without necessarily consuming the
+exact same things? 
+
+To satisfy the ``Pluralism in Economics'' crowd, let us avoid
+the term ownership for now. We simply observe that some people will produce
+things and not necessarily the same people will consume\footnote{
+	You can turn a product you can use \(m\) times (before it breaks down)
+	without loss of generality into a consumable, by considering these \(m\) uses
+	to be individual products. So a person does not ``have'' a chair, but rather
+	the \(i\)-th usage of said chair. With this trick in mind, all products are
+	consumable.
+} the products.
+No matter how you organize a society, from an individual perspective, there
+are going to be goods the individual \(i\) produces \(S_i\in\real^\dims\) and
+goods the individual consumes \(D_i\in\real^\dims\). And fundamentally a
+society cannot consume more than is produced (and probably does not want to
+produce more than necessary), so we need
+\[
+	S = \sum_{i=1}^n S_i = \sum_{i=1}^n D_i = D.
+\]
+The big question is: how can we ensure this? We also want everyone to
+voluntarily participate in society. And people are going to stop doing so, if
+they feel ripped off as they contribute much more than they get back.
+Unfortunately it is difficult to compare the size of two vectors \(S_i\) and
+\(D_i\) of uncomparable products. Of course we could enforce \(S_i=D_i\), but
+then we are back to hermits, since everyone is using only what they produce.
+
+To make the products comparable again, we could measure them by the time it took
+to produce them. In other words the effort required for them. But recall that
+the time needed to produce good \(j\), \(l_i^{(j)}\), might be different for
+every person \(i\). Additionally this time is private information of person
+\(i\). Especially if we generalize it to be a discomfort measure instead of
+strictly time.
+
+
+\begin{example}[Definitely not Capitalism]
+	\label{ex: Definitely not Capitalism}
+	Let us try to build a communist utopia, without money and ownership.  For
+	this assume that the person which produces good \(j\) jots down their
+	subjective cost of production \(l_i^{(j)}\) and tags the product with it and
+	puts it into a communal holding space. Additionally they add the cost to
+	their ``work-time'' tally.  Whenever someone wants to consume the product,
+	they add the cost to their ``consumption-time'' tally, and take the product
+	from communal holding space.  Everyone makes sure that their ``work-time''
+	tally is comparable to their ``consumption-time''. We have tags, because
+	people are bad at estimating how much effort is behind the products they
+	consume.
+
+	Does this sound like a utopia? Great!
+	We can simplify the two tallies into one, because we only want to make
+	sure that the difference is approximately zero. So we might as well add
+	``work-time'' and subtract ``consumption-time'' from the get go. We also do not
+	need to know how the current tally came to be, so we only need to keep track
+	of the running total. This total is going to fluctuate around zero. When it
+	is positive, you have worked more for society than you have consumed. And
+	vice versa when it is negative.
+
+	Now consider the life of a single product. When it is consumed, the cost was
+	added to the tally of the producer and subtracted from the consumer. If you
+	had chips to represent the tally, then they would have been simply passed from
+	the consumer to the producer. Oh, wait! That's money! People are trading goods
+	for money!
+
+	Although right now, tallies can be negative and we do not have negative
+	chips/money. This is a problem if you start out with everyone at zero. Because
+	nobody can go below that. Or can they? If Alice signs a piece of paper saying
+	she owes \(x\) amount of work-time, then she can pass that for a product that
+	costs \(x\). The person receiving this note could then pass this note on to
+	pay for something too. And if everyone trusts Alice, this is going to go
+	swimmingly. So in principle anyone can create money. Money is just the debt
+	of someone. The difficulty is creating debt which is widely accepted.
+
+	The balance on a bill splitting app is money (in your friends circle), a coupon
+	is money (scammers like to be paid in it), etc. But the money which is most
+	widely accepted, is the money issued by a trusted government. Because money is
+	debt, so the question whether you accept is, is whether you trust the debtor.
+\end{example}
+\begin{remark}
+	Example~\ref{ex: Definitely not Capitalism} is supposed to show how difficult
+	it is to come up with a system which balances production and consumption,
+	which is not mathematically equivalent to a market economy. And while the
+	initially proposed tally system might be mathematically equivalent, it is
+	much less robust and efficient in reality. Because you need to \emph{trust}
+	people to update their tallies accurately, \emph{trust} that they make sure
+	they don't go too far into the negative, and you need to travel to a
+	communal holding space instead of conducting exchanges \emph{decentrally}.
+\end{remark}
+
+\input{sections/measuring_effort/prices_measure_effort.tex}
+\input{sections/measuring_effort/money_supply_and_price_stability.tex}
+\input{sections/measuring_effort/individual_decision_problem.tex}
+\input{sections/measuring_effort/prices_in_societies_of_clones.tex}
+\input{sections/measuring_effort/intuition_2d_mixed_case.tex}
