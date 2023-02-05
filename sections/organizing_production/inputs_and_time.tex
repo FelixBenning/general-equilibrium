@@ -12,13 +12,13 @@ represent the consumption of some good for production.
 
 Let us now consider a specific example. 
 \[
-	h_{\cdot k} = (h_{1k},\dots, h_{\dims k})\]
+	h_k = (h_k^{(1)},\dots, h_k^{(\dims)})\]
 is production method \(k\). Completing one cycle of production results in the
-production of \(h_{jk}\) units of good \(j\). If \(h_{jk}\) is negative, this
+production of \(h_k^{(j)}\) units of good \(j\). If \(h_k^{(j)}\) is negative, this
 was an input. Typically most entries are zero, some are negative and one is
 positive. Let \(v = (v_k)_{k\le m}\) denote the number of production cycles for
-each production method. Then for \(H=(h_{jk})_{j\le\dims,k\le m}\) our total
-production is given by
+each production method. Then for a matrix \(H\) with entries
+\(H_{jk}=h_k^{(j)}\) our total production is given by
 \[
 	x = Hv.
 \]
@@ -84,3 +84,68 @@ than its first creation. Research would also need to be stochastic.
 
 This is where this model breaks down, and probably also where the efficiency
 guarantees break.
+
+\subsubsection{Multiple Time Periods}
+
+We now want to model \(T\) time periods with \(\dims\) goods. To make notation
+easier, we are going to start counting at zero. Any \(x\in X_i\) is now not
+any longer of the form
+\[
+	x=(x^{(0)},\dots, x^{(\dims-1)})
+\]
+but rather we have such an output vector in every time period. Using two indices
+we have
+\[
+	x=\begin{pmatrix}
+		x^{(0,0)} & \dots & x^{(0, \dims-1)}\\
+		\vdots & & \vdots\\
+		x^{(T-1,0)} & & x^{(T-1,\dims-1)}
+	\end{pmatrix}
+\]
+To avoid this two dimensional vector, we are going to concatenate the rows,
+i.e.
+\[
+	x^{(\dims\cdot t + j)} = x^{(t,j)}.
+\]
+Here counting from zero came in useful. Now \(x\) is again just a vector in
+\(\real^{T\dims}\). So if we define \(\tilde{\dims}=T\dims\), we can reuse
+everything we have done so far, or can we? Not quite. Because now we also have
+multiple labour restrictions \(L_i^{(t)}\), i.e. \(L_i\) became a vector.
+We also want to be able to transfer goods from the past to the future (i.e.
+store them for future consumption).
+
+This storage operation of good \(j\) from time \(t\) to \(t+1\) can easily be
+expressed by a production method \(h_{k}\) where \(h_k^{(\dims\cdot t+j)}=-1\)
+and \(h_k^{(\dims\cdot (t+1) + j)}=1\) with all other entries being zero.
+We can even model imperfect storage by setting the output to less than \(1\).
+
+So modelling inputs almost models time for free. Except for \(L_i\). Because
+we utilize production methods \(h_k\), \(L_i\) needs to relate to the
+production cycles \(v\).
+Since we can store products in the past to receive them in the future, but not
+the other way around, there are typically more production methods 
+available in the past than in the future. So we need to allow for different
+counts. 
+The easiest way to do this notation wise, is to introduce indicators \(\xi(i,t)\),
+such that \(\xi(i,t)_k\) is equal to \(l_i^{(k)}\) if production method \(h_k\)
+is available in time \(t\) and zero otherwise. Since input and outputs have a
+time dimension attached to them, all production methods will only be available
+for one time period. I.e. for any \(k\) there exists only one \(t\) where
+\(\xi(i,t)\) is not zero. We then require for every \(t\)
+\[
+	\langle \xi(i,t), v\rangle \le L_i^t
+\]
+Concatenating the \(\xi(i,t)\) over \(t\) as rows together into \(\Xi_i\), we
+can finally write down the production capability as 
+\[
+	X_i = \{ Hv : v\in \real_{\ge 0}^\dims,\; \Xi_i v \preceq L_i\}.
+\]
+Which finally results in the optimization problem
+\[
+	\mu(p, X_i) = \max_{v\in \real_{\ge 0}^T} \langle v, H^T p\rangle 
+	\quad\text{s.t.}\quad
+	\Xi_i v \preceq L_i.
+\]
+This is the canonical form of a general linear optimization problem. While we
+can no longer solve it explicitly, there are numerous algorithms available to
+chose from. 
